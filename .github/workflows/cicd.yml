@@ -1,0 +1,41 @@
+name: Vota bridge CICD
+
+on:
+  push:
+    branches: [dora-migrate-vota]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v4
+      - name: Build image
+        env:
+          BUILD_ARG: ${{ github.ref_name }}
+        run: |
+          docker build -t vota-bridge-ui:local -f Dockerfile .
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@master
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE }}
+          aws-region: ap-southeast-1
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          mask-password: 'true'
+      - name: Tag, push  image to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: vota-bridge-ui
+          IMAGE_TAG: ${{ github.ref_name }}
+        run: |
+          docker tag vota-bridge-ui:local $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+      - name: Redeploy on aws
+        run: |
+          aws eks update-kubeconfig --region  ap-southeast-1 --name ${{ secrets.EKS_CLUSTER }}
