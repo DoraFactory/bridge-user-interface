@@ -60,3 +60,8 @@ To configure network (e.g. staging, testnet or mainnet),
 For more details, check out Vercel's [official documentation](https://vercel.com/docs).
 
 The primary license for this project is the GNU Affero General Public License v3.0 (AGPL-3.0), see [LICENSE](https://github.com/dydxfoundation/bridge/blob/main/LICENSE).
+
+## How to test Dora token Bridge
+1. Obtain `SepoliaETH` for gas consumption. You can get some testnet ETH from here: https://cloud.google.com/application/web3/faucet/ethereum/sepolia
+2. Import **INF** token in MetaMask for testing using the contract address: `0xe0A1A9e1a0704CE7B6c73988dbb4E2a54B846791`
+> Bridge contract address: 0x9A3b7A8B2328375080E688820ddB29b420571eec
