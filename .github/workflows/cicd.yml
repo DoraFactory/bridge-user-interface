@@ -39,3 +39,4 @@ jobs:
       - name: Redeploy on aws
         run: |
           aws eks update-kubeconfig --region  ap-southeast-1 --name ${{ secrets.EKS_CLUSTER }}
+          kubectl rollout restart deploy vota-bridge-ui-dev
