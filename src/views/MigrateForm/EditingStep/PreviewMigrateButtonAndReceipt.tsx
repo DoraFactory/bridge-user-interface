@@ -48,7 +48,7 @@ export const PreviewMigrateButtonAndReceipt = ({ isDisabled, isLoading }: Elemen
   const migrateDetailItems = [
     {
       key: 'ethDYDXBalance',
-      label: getLabel({ chain: 'Ethereum', asset: 'ethDYDX' }),
+      label: getLabel({ chain: 'Ethereum', asset: 'ethDORA' }),
       value: (
         <DiffOutput
           type={OutputType.Asset}
@@ -62,35 +62,35 @@ export const PreviewMigrateButtonAndReceipt = ({ isDisabled, isLoading }: Elemen
         />
       ),
     },
-    import.meta.env.VITE_BRIDGE_CONTRACT_ADDRESS && {
-      key: 'wethDYDXBalance',
-      label: getLabel({ chain: 'Ethereum', asset: 'wethDYDX' }),
-      value: (
-        <DiffOutput
-          type={OutputType.Asset}
-          value={wethDYDXBalance}
-          newValue={amountBN?.plus(wethDYDXBalance ?? 0).toNumber() ?? 0}
-          sign={NumberSign.Positive}
-          withDiff={Boolean(wethDYDXBalance !== undefined && amountBN)}
-          roundingMode={BigNumber.ROUND_DOWN}
-        />
-      ),
-    },
-    dydxAddress &&
-      dydxAddress === destinationAddress && {
-        key: 'DYDXBalance',
-        label: getLabel({ chain: 'dYdX Chain', asset: 'DYDX' }),
-        value: (
-          <DiffOutput
-            type={OutputType.Asset}
-            value={DYDXBalance}
-            newValue={amountBN?.plus(DYDXBalance ?? 0).toNumber() ?? 0}
-            sign={NumberSign.Positive}
-            withDiff={Boolean(DYDXBalance !== undefined && amountBN)}
-            roundingMode={BigNumber.ROUND_DOWN}
-          />
-        ),
-      },
+    // import.meta.env.VITE_BRIDGE_CONTRACT_ADDRESS && {
+    //   key: 'wethDYDXBalance',
+    //   label: getLabel({ chain: 'Ethereum', asset: 'wethDYDX' }),
+    //   value: (
+    //     <DiffOutput
+    //       type={OutputType.Asset}
+    //       value={wethDYDXBalance}
+    //       newValue={amountBN?.plus(wethDYDXBalance ?? 0).toNumber() ?? 0}
+    //       sign={NumberSign.Positive}
+    //       withDiff={Boolean(wethDYDXBalance !== undefined && amountBN)}
+    //       roundingMode={BigNumber.ROUND_DOWN}
+    //     />
+    //   ),
+    // },
+    // dydxAddress &&
+    //   dydxAddress === destinationAddress && {
+    //     key: 'DYDXBalance',
+    //     label: getLabel({ chain: 'dYdX Chain', asset: 'DYDX' }),
+    //     value: (
+    //       <DiffOutput
+    //         type={OutputType.Asset}
+    //         value={DYDXBalance}
+    //         newValue={amountBN?.plus(DYDXBalance ?? 0).toNumber() ?? 0}
+    //         sign={NumberSign.Positive}
+    //         withDiff={Boolean(DYDXBalance !== undefined && amountBN)}
+    //         roundingMode={BigNumber.ROUND_DOWN}
+    //       />
+    //     ),
+    //   },
   ].filter(isTruthy);
 
   return (

@@ -31,7 +31,7 @@ export const OnboardingTriggerButton = ({ size = ButtonSize.Small }: StyleProps)
       {
         {
           [OnboardingState.Disconnected]: stringGetter({ key: STRING_KEYS.CONNECT_WALLET }),
-          [OnboardingState.WalletConnected]: stringGetter({ key: STRING_KEYS.RECOVER_KEYS }),
+          // [OnboardingState.WalletConnected]: stringGetter({ key: STRING_KEYS.RECOVER_KEYS }),
         }[onboardingState as string]
       }
     </Button>

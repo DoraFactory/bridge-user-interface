@@ -167,17 +167,17 @@ export const COSMOS_DERIVATION_PATH = "m/44'/118'/0'/0/0";
 export const SIGN_TYPED_DATA = {
   primaryType: 'dYdX',
   domain: {
-    name: 'dYdX Chain',
+    name: 'Dora Vota-ash Chain',
   },
   types: {
     dYdX: [{ name: 'action', type: 'string' }],
   },
   message: {
-    action: 'dYdX Chain Onboarding',
+    action: 'Dora Token Migration Onboarding',
   },
 } as const;
 
 export type PrivateInformation = ReturnType<typeof onboarding.deriveHDKeyFromEthereumSignature>;
 
 export type EthereumAddress = `0x${string}`;
-export type DydxAddress = `dydx${string}`;
+export type DydxAddress = `dora${string}`;

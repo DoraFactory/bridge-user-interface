@@ -24,7 +24,7 @@ export const TokensBeforeAfterDiagram = () => {
         <Styled.ValueContainer>
           <Styled.TokenColumn>
             <Styled.TokenIcon>
-              <AssetIcon symbol="DYDX" />
+              <AssetIcon symbol="DORA" />
               <AssetIcon symbol="ETH" />
             </Styled.TokenIcon>
             <Styled.Output
@@ -32,7 +32,7 @@ export const TokensBeforeAfterDiagram = () => {
               type={OutputType.Asset}
               fractionDigits={TOKEN_DECIMALS}
             />
-            <Tag>ethDYDX</Tag>
+            <Tag>ethDORA</Tag>
             <span>
               {stringGetter({
                 key: STRING_KEYS.ON_CHAIN,
@@ -52,17 +52,17 @@ export const TokensBeforeAfterDiagram = () => {
         <Styled.ValueContainer>
           <Styled.TokenColumn>
             <Styled.TokenIcon>
-              <AssetIcon symbol="DYDX" />
+              <AssetIcon symbol="DORA" />
               <AssetIcon symbol="ETH" />
             </Styled.TokenIcon>
 
             <Styled.Output
-              value={amountBN}
+              value={amountBN?.negated()}
               type={OutputType.Asset}
               fractionDigits={TOKEN_DECIMALS}
               showSign={ShowSign.Both}
             />
-            <Tag>wethDYDX</Tag>
+            <Tag>ethDORA</Tag>
             <span>
               {stringGetter({
                 key: STRING_KEYS.ON_CHAIN,
@@ -74,8 +74,8 @@ export const TokensBeforeAfterDiagram = () => {
           </Styled.TokenColumn>
           <Styled.TokenColumn>
             <Styled.TokenIcon>
-              <AssetIcon symbol="DYDX" />
-              <AssetIcon symbol="DYDX" />
+              <AssetIcon symbol="DORA" />
+              <AssetIcon symbol="DORA" />
             </Styled.TokenIcon>
 
             <Styled.Output
@@ -84,12 +84,12 @@ export const TokensBeforeAfterDiagram = () => {
               fractionDigits={TOKEN_DECIMALS}
               showSign={ShowSign.Both}
             />
-            <Tag>DYDX</Tag>
+            <Tag>DORA</Tag>
             <span>
               {stringGetter({
                 key: STRING_KEYS.ON_CHAIN,
                 params: {
-                  CHAIN: 'dYdX Chain',
+                  CHAIN: 'vota-ash Chain',
                 },
               })}
             </span>

@@ -30,9 +30,9 @@ export enum DestinationAddressOptions {
 
 export type PendingMigrationData = {
   id: number;
-  blockHeight: number;
   address: DydxAddress;
   amount: BigNumber;
+  txHash: String
 };
 
 export enum PendingMigrationFilter {

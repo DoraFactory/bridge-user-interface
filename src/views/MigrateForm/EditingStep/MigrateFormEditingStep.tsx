@@ -38,7 +38,7 @@ import { PreviewMigrateButtonAndReceipt } from './PreviewMigrateButtonAndReceipt
 
 export const MigrateFormEditingStep = () => {
   const stringGetter = useStringGetter();
-  const { dydxAddress: accountDydxAddress } = useAccounts();
+  const { dydxAddress: accountDoraAddress } = useAccounts();
   const { ethDYDXBalance } = useAccountBalance();
   const { isAddressSanctioned } = useRestrictions();
 
@@ -61,8 +61,8 @@ export const MigrateFormEditingStep = () => {
   const onOptionChange = (option: string) => {
     if (option === DestinationAddressOptions.Other) {
       setDestinationAddress('');
-    } else if (accountDydxAddress) {
-      setDestinationAddress(accountDydxAddress);
+    } else if (accountDoraAddress) {
+      setDestinationAddress(accountDoraAddress);
     }
     setDestinationAddressOption(option as DestinationAddressOptions);
   };
@@ -87,7 +87,7 @@ export const MigrateFormEditingStep = () => {
               CHAIN: 'Ethereum',
             },
           })}
-          <Tag>ethDYDX</Tag>
+          <Tag>ethDORA</Tag>
         </Styled.InlineRow>
       ),
       value: (
@@ -152,14 +152,15 @@ export const MigrateFormEditingStep = () => {
             value: DestinationAddressOptions.Other,
             label: ( */}
               <Styled.Label>
-                {stringGetter({
+                {/* {stringGetter({
                   key: STRING_KEYS.SEND_TO_ANOTHER_ADDRESS,
                   params: {
                     ADDRESS: (
                       <strong>{stringGetter({ key: STRING_KEYS.DYDX_CHAIN_ADDRESS })}</strong>
                     ),
                   },
-                })}
+                })} */}
+                Send to your vota-ash chain Address
               </Styled.Label>
             {/* ), */}
             {/* slotContent: ( */}
@@ -169,13 +170,15 @@ export const MigrateFormEditingStep = () => {
                   onInput={(e: SyntheticInputEvent) => setDestinationAddress(e.target?.value)}
                   label={
                     <Styled.DestinationInputLabel>
-                      {stringGetter({ key: STRING_KEYS.DYDX_CHAIN_ADDRESS })}
+                      {/* {stringGetter({ key: STRING_KEYS.DYDX_CHAIN_ADDRESS })} */}
+                      vota-ash chain Address
                       {isDestinationAddressValid && <Icon iconName={IconName.Check} />}
                     </Styled.DestinationInputLabel>
                   }
                   type={InputType.Text}
                   value={destinationAddress}
-                  placeholder={stringGetter({ key: STRING_KEYS.ENTER_ADDRESS })}
+                  // placeholder={stringGetter({ key: STRING_KEYS.ENTER_ADDRESS })}
+                  placeholder={"Enter vota-ash chain address"}
                   slotRight={renderFormInputButton({
                     label: stringGetter({ key: STRING_KEYS.PASTE }),
                     isInputEmpty: !destinationAddress,
@@ -187,11 +190,12 @@ export const MigrateFormEditingStep = () => {
                     !isDestinationAddressValid && {
                       attached: true,
                       type: AlertType.Error,
-                      message: stringGetter({
-                        key: isAddressSanctioned(destinationAddress)
-                          ? STRING_KEYS.MIGRATION_BLOCKED_MESSAGE_DESTINATION
-                          : STRING_KEYS.INVALID_ADDRESS_BODY,
-                      }),
+                      // message: stringGetter({
+                      //   key: isAddressSanctioned(destinationAddress)
+                      //     ? STRING_KEYS.MIGRATION_BLOCKED_MESSAGE_DESTINATION
+                      //     : STRING_KEYS.INVALID_ADDRESS_BODY,
+                      // }),
+                      message: "Please enter a valid DORA vota-ash chain address.",
                     }
                   }
                 />

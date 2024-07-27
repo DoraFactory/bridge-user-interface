@@ -19,15 +19,21 @@ export const WAGMI_SUPPORTED_CHAINS: Chain[] = [mainnet, sepolia];
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   WAGMI_SUPPORTED_CHAINS,
   [
-    import.meta.env.VITE_ALCHEMY_API_KEY &&
-      alchemyProvider({ apiKey: import.meta.env.VITE_ALCHEMY_API_KEY }),
-    infuraProvider({apiKey: "https://mainnet.infura.io/v3/bee5140d9d2243d580ef49ade75c2356"}),
+    // import.meta.env.VITE_ALCHEMY_API_KEY &&
+    //   alchemyProvider({ apiKey: import.meta.env.VITE_ALCHEMY_API_KEY }),
+    import.meta.env.VITE_INFURA_API_KEY &&
+    infuraProvider({ apiKey: import.meta.env.VITE_INFURA_API_KEY }),
+    // infuraProvider({apiKey: "https://mainnet.infura.io/v3/bee5140d9d2243d580ef49ade75c2356"}),
     jsonRpcProvider({
-      rpc: (chain) => ({ http: chain.rpcUrls.default.http[0] }),
+      rpc: (chain) => ({ http: chain.rpcUrls?.default?.http[0] }),
     }),
-    publicProvider(),
+    // publicProvider(),
   ].filter(isTruthy)
 );
+
+console.log(chains)
+console.log(publicClient)
+console.log(webSocketPublicClient)
 
 const injectedConnectorOptions = {
   chains,

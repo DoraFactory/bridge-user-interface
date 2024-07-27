@@ -11,7 +11,15 @@ import {
 import { detectInjectedEip1193Providers } from './providers';
 
 // Formatting
-export const truncateAddress = (address?: string, prefix: string = 'dydx') => {
+export const truncateAddress = (address?: string, prefix: string = 'dora') => {
+  if (!address) return '';
+  const hash = address.replace(prefix, '');
+  const firstHalf = hash.slice(0, 4);
+  const secondHalf = hash.slice(-4);
+  return `${prefix}${firstHalf}...${secondHalf}`;
+};
+
+export const truncateTransactionHash = (address?: string, prefix: string = '') => {
   if (!address) return '';
   const hash = address.replace(prefix, '');
   const firstHalf = hash.slice(0, 4);

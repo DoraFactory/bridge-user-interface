@@ -85,17 +85,17 @@ export const AccountMenu = () => {
         )
       }
       items={[
-        onboardingState === OnboardingState.WalletConnected && {
-          value: 'ConnectToChain',
-          label: (
-            <Styled.ConnectToChain>
-              <p>{stringGetter({ key: STRING_KEYS.MISSING_KEYS_DESCRIPTION })}</p>
-              <OnboardingTriggerButton />
-            </Styled.ConnectToChain>
-          ),
-          onSelect: onRecoverKeys,
-          separator: true,
-        },
+        // onboardingState === OnboardingState.WalletConnected && {
+        //   value: 'ConnectToChain',
+        //   label: (
+        //     <Styled.ConnectToChain>
+        //       <p>{stringGetter({ key: STRING_KEYS.MISSING_KEYS_DESCRIPTION })}</p>
+        //       <OnboardingTriggerButton />
+        //     </Styled.ConnectToChain>
+        //   ),
+        //   onSelect: onRecoverKeys,
+        //   separator: true,
+        // },
         // onboardingState === OnboardingState.AccountConnected &&
         //   hdKey && {
         //     value: 'MnemonicExport',

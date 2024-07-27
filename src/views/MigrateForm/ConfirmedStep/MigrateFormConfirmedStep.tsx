@@ -3,7 +3,7 @@ import BigNumber from 'bignumber.js';
 
 import { ButtonAction, ButtonType } from '@/constants/buttons';
 import { TransactionStatus } from '@/constants/migrate';
-import { STRING_KEYS } from '@/constants/localization';
+import { STRING_KEYS, DORA_KEYS } from '@/constants/localization';
 
 import { layoutMixins } from '@/styles/layoutMixins';
 
@@ -74,7 +74,7 @@ export const MigrateFormConfirmedStep = () => {
             ),
             value: (
               <Link href={`${import.meta.env.VITE_ETHERSCAN_URL}/tx/${bridgeTxHash}`} withIcon>
-                {stringGetter({ key: STRING_KEYS.BLOCK_EXPLORER })}
+                Block explorer
               </Link>
             ),
           },
@@ -88,26 +88,8 @@ export const MigrateFormConfirmedStep = () => {
             ),
           },
           {
-            key: 'wethDYDX',
-            label: getAssetOnChainLabel({
-              asset: 'wethDYDX',
-              chain: 'Ethereum',
-            }),
-            value: (
-              <Styled.Output
-                type={OutputType.Asset}
-                showSign={ShowSign.Both}
-                value={amountBN}
-                roundingMode={BigNumber.ROUND_DOWN}
-              />
-            ),
-          },
-          {
             key: 'ethDYDX',
-            label: getAssetOnChainLabel({
-              asset: 'ethDYDX',
-              chain: 'Ethereum',
-            }),
+            label: 'ethDORA on Ethereum',
             value: (
               <Styled.Output
                 type={OutputType.Asset}
@@ -122,8 +104,8 @@ export const MigrateFormConfirmedStep = () => {
       />
 
       <DetailsReceipt
-        header={stringGetter({ key: STRING_KEYS.DYDX_CHAIN_SETTLEMENT })}
-        headerIcon={<AssetIcon symbol="DYDX" />}
+        header={DORA_KEYS.DORA_CHAIN_SETTLEMENT}
+        headerIcon={<AssetIcon symbol="DORA" />}
         detailItems={[
           {
             key: 'transaction',
@@ -161,10 +143,7 @@ export const MigrateFormConfirmedStep = () => {
           },
           {
             key: 'DYDX',
-            label: getAssetOnChainLabel({
-              asset: 'DYDX',
-              chain: 'dYdX Chain',
-            }),
+            label: 'DORA on vota-ash Chain',
             value: (
               <Styled.Output
                 type={OutputType.Asset}

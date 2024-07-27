@@ -9,7 +9,7 @@ import { TOKEN_DECIMAL_SHIFT, TransactionStatus } from '@/constants/migrate';
 import { DydxAddress, EthereumAddress } from '@/constants/wallets';
 
 import { useTrackTransactionFinalized } from './useTrackTransactionFinalized';
-import { useIsDydxAddressValid } from '../useIsDydxAddressValid';
+import { useIsDoraAddressValid } from '../useIsDoraAddressValid';
 import { useDydxClient } from '../useDydxClient';
 
 export const useBridgeTransaction = ({
@@ -29,7 +29,7 @@ export const useBridgeTransaction = ({
     bridgeTxMinedBlockNumber,
   });
 
-  const isDestinationAddressValid = useIsDydxAddressValid(destinationAddress);
+  const isDestinationAddressValid = useIsDoraAddressValid(destinationAddress);
 
   useEffect(() => {
     if (isTransactionFinalized) setTransactionStatus(TransactionStatus.Finalized);
@@ -60,13 +60,12 @@ export const useBridgeTransaction = ({
   const { writeAsync: bridge, isLoading: isBridgePending } = useContractWrite({
     address: import.meta.env.VITE_BRIDGE_CONTRACT_ADDRESS,
     abi: bridgeContractAbi,
-    functionName: 'bridge',
+    functionName: 'submit',
     args: [
       amountBN?.shiftedBy(TOKEN_DECIMAL_SHIFT)?.toFixed() ?? '0',
       isDestinationAddressValid
         ? `0x${toHex(fromBech32(destinationAddress as DydxAddress).data)}`
         : '',
-      '', // memo
     ],
     chainId: Number(import.meta.env.VITE_ETH_CHAIN_ID),
   });

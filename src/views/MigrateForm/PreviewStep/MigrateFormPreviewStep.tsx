@@ -4,7 +4,7 @@ import styled, { type AnyStyledComponent } from 'styled-components';
 
 import { AlertType } from '@/constants/alerts';
 import { ButtonAction, ButtonType } from '@/constants/buttons';
-import { STRING_KEYS } from '@/constants/localization';
+import { STRING_KEYS, DORA_LONG_SENTENCE } from '@/constants/localization';
 
 import { layoutMixins } from '@/styles/layoutMixins';
 
@@ -45,7 +45,7 @@ export const MigrateFormPreviewStep = () => {
         detailItems={[
           {
             key: 'eth_settlement',
-            label: stringGetter({ key: STRING_KEYS.ETHEREUM_SETTLEMENT }),
+            label: 'Ethereum settlement',
             value: (
               <Tag>
                 {stringGetter({
@@ -57,7 +57,7 @@ export const MigrateFormPreviewStep = () => {
           },
           {
             key: 'eth_finalization',
-            label: stringGetter({ key: STRING_KEYS.ETHEREUM_FINALIZATION }),
+            label: 'Ethereum finalization',
             value: (
               <Tag>
                 {stringGetter({
@@ -69,7 +69,7 @@ export const MigrateFormPreviewStep = () => {
           },
           {
             key: 'dydx_settlement',
-            label: stringGetter({ key: STRING_KEYS.DYDX_CHAIN_SETTLEMENT }),
+            label: 'Dora vota-ash Chain settlement',
             tooltip: 'dydx-chain-settlement',
             value: (
               <Tag>
@@ -95,17 +95,13 @@ export const MigrateFormPreviewStep = () => {
             checked={hasAcknowledgedDuration}
             onCheckedChange={setHasAcknowledgedDuration}
             id="acknowledge-duration"
-            label={stringGetter({
-              key: STRING_KEYS.CONFIRM_MIGRATION_DISCLAIMER_1,
-            })}
+            label={DORA_LONG_SENTENCE.CONFIRM_MIGRATION_DISCLAIMER_1}
           />
           <Checkbox
             checked={hasAcknowledgedLocked}
             onCheckedChange={setHasAcknowledgedLocked}
             id="acknowledge-locked"
-            label={stringGetter({
-              key: STRING_KEYS.CONFIRM_MIGRATION_DISCLAIMER_2,
-            })}
+            label={DORA_LONG_SENTENCE.CONFIRM_MIGRATION_DISCLAIMER_2}
           />
         </>
       )}

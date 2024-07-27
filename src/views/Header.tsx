@@ -36,11 +36,6 @@ export const Header = () => {
     {
       group: 'navigation',
       items: [
-        import.meta.env.VITE_TRADE_URL && {
-          value: 'TRADE',
-          label: stringGetter({ key: STRING_KEYS.TRADE }),
-          href: import.meta.env.VITE_TRADE_URL,
-        },
         {
           value: 'MIGRATE',
           label: stringGetter({ key: STRING_KEYS.MIGRATE }),
@@ -53,7 +48,7 @@ export const Header = () => {
           subitems: RELEVANT_LINKS.map((linkItem) => ({
             value: linkItem.value,
             slotBefore: linkItem.iconName ? <Icon iconName={linkItem.iconName} /> : undefined,
-            label: stringGetter({ key: linkItem.labelStringKey }),
+            label: linkItem.labelStringKey,
             href: linkItem.href,
           })),
         },

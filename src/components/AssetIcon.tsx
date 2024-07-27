@@ -5,6 +5,7 @@ export type AssetSymbol = keyof typeof assetIcons;
 const assetIcons = {
   DYDX: '/currencies/dydx.png',
   ETH: '/currencies/eth.png',
+  DORA: '/currencies/dora.png'
 } as const;
 
 const isAssetSymbol = (symbol?: string): symbol is AssetSymbol =>

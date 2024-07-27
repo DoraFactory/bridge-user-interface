@@ -1,7 +1,8 @@
 import { useContext, createContext } from 'react';
 import { useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
-import { useBalance } from 'wagmi';
+import { useBalance, useContractRead } from 'wagmi';
+import { ethINFContractAbi } from '@/constants/abi';
 
 import { TOKEN_DECIMAL_SHIFT } from '@/constants/migrate';
 
@@ -29,12 +30,36 @@ const useAccountBalanceContext = () => {
   const { evmAddress, dydxAddress, getAccountBalance } = useAccounts();
   const canAccountMigrate = useSelector(calculateCanAccountMigrate);
 
+  console.log(`ETH dydx contract address is ${import.meta.env.VITE_ETH_DORA_ADDRESSS}`)
+  console.log(`query evmAddress is ${evmAddress}`)
+  console.log(`是否可以进行账户迁移${canAccountMigrate}`)
+  console.log(`chain id is ${Number(import.meta.env.VITE_ETH_CHAIN_ID)}`)
+
   const { data: ethDYDXBalanceData, refetch: refetchEthDYDXBalance } = useBalance({
-    enabled: import.meta.env.VITE_ETH_DYDX_ADDRESSS && evmAddress && canAccountMigrate,
+    enabled: import.meta.env.VITE_ETH_DORA_ADDRESSS && evmAddress && canAccountMigrate,
     address: evmAddress,
     chainId: Number(import.meta.env.VITE_ETH_CHAIN_ID),
-    token: import.meta.env.VITE_ETH_DYDX_ADDRESSS,
+    token: import.meta.env.VITE_ETH_DORA_ADDRESSS,
   });
+
+  const { data: balance, isError, isLoading, refetch } = useContractRead({
+    address: import.meta.env.VITE_ETH_DORA_ADDRESSS,
+    abi: ethINFContractAbi,
+    functionName: 'balanceOf',
+    args: [evmAddress],
+    watch: true,
+  });
+
+  console.log(`dydx使用合约查询的余额为${balance}`)
+
+  console.log(`ethDYDXBalanceData is ${ethDYDXBalanceData}`)
+  const result = useBalance({
+    enabled: import.meta.env.VITE_ETH_DORA_ADDRESSS && evmAddress && canAccountMigrate,
+    address: evmAddress,
+    chainId: Number(import.meta.env.VITE_ETH_CHAIN_ID),
+    token: import.meta.env.VITE_ETH_DORA_ADDRESSS,
+  });
+  console.log(`result查询结果为${result.toString()}`)
 
   const { data: wethDYDXBalanceData, refetch: refetchWethDYDXBalance } = useBalance({
     enabled: import.meta.env.VITE_BRIDGE_CONTRACT_ADDRESS && evmAddress && canAccountMigrate,
@@ -62,6 +87,8 @@ const useAccountBalanceContext = () => {
 
   const { formatted: ethDYDXBalance } = ethDYDXBalanceData || {};
   const { formatted: wethDYDXBalance } = wethDYDXBalanceData || {};
+
+  console.log(ethDYDXBalance)
 
   const refetchBalances = () => {
     if (!evmAddress || !canAccountMigrate) return;

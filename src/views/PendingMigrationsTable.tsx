@@ -1,4 +1,5 @@
 import styled, { type AnyStyledComponent } from 'styled-components';
+import { Link } from '@/components/Link';
 
 import { STRING_KEYS, StringGetterFunction } from '@/constants/localization';
 
@@ -24,15 +25,17 @@ import { type ColumnDef, Table, TableCell } from '@/components/Table';
 import { VerticalSeparator } from '@/components/Separator';
 import { WithLabel } from '@/components/WithLabel';
 
-import { truncateAddress } from '@/lib/wallet';
+import { truncateAddress, truncateTransactionHash } from '@/lib/wallet';
 import { formatRelativeTimeFromMs } from '@/lib/dateTime';
 
 export enum PendingMigrationsTableColumnKey {
   Address = 'Address',
   Amount = 'Amount',
-  BlockHeight = 'BlockHeight',
+  // BlockHeight = 'BlockHeight',
+  TransactionHash = 'TransactionHash',
 }
 
+const defaultTransactionHash = "0x0000000000000000000000000000000000000000000000000000000000000000"
 const getPendingMigrationsTableColumnDef = ({
   key,
   latestBlockHeight,
@@ -42,12 +45,12 @@ const getPendingMigrationsTableColumnDef = ({
   latestBlockHeight?: number;
   stringGetter: StringGetterFunction;
 }): ColumnDef<PendingMigrationData> =>
-  (
-    ({
+  ((
+    {
       [PendingMigrationsTableColumnKey.Address]: {
         columnKey: PendingMigrationsTableColumnKey.Address,
         getCellValue: (row) => row.address,
-        label: stringGetter({ key: STRING_KEYS.DYDX_CHAIN_ADDRESS }),
+        label: 'Dora vota-ash Chain Address',
         renderCell: ({ address }) => (
           <CopyButton buttonType="text" value={address}>
             {truncateAddress(address)}
@@ -57,7 +60,7 @@ const getPendingMigrationsTableColumnDef = ({
       [PendingMigrationsTableColumnKey.Amount]: {
         columnKey: PendingMigrationsTableColumnKey.Amount,
         getCellValue: (row) => row.amount.toNumber(),
-        label: stringGetter({ key: STRING_KEYS.AMOUNT }),
+        label: 'DORA Amount',
         renderCell: ({ amount }) => (
           <Styled.InlineRow>
             <Output type={OutputType.Asset} value={amount} />
@@ -65,32 +68,24 @@ const getPendingMigrationsTableColumnDef = ({
           </Styled.InlineRow>
         ),
       },
-      [PendingMigrationsTableColumnKey.BlockHeight]: {
-        columnKey: PendingMigrationsTableColumnKey.BlockHeight,
-        getCellValue: (row) => row.blockHeight,
-        label: stringGetter({ key: STRING_KEYS.ESTIMATED_TIME_LEFT }),
-        renderCell: ({ blockHeight }) => (
+      [PendingMigrationsTableColumnKey.TransactionHash]: {
+        columnKey: PendingMigrationsTableColumnKey.TransactionHash,
+        getCellValue: (row) => row.txHash,
+        label: 'Transaction Hash',
+        renderCell: ({ txHash }) => (
           <TableCell stacked>
-            {latestBlockHeight && blockHeight > latestBlockHeight && (
-              <Output
-                type={OutputType.Text}
-                value={formatRelativeTimeFromMs(
-                  (blockHeight - latestBlockHeight) * DYDX_CHAIN_ESTIMATED_BLOCK_TIME_MS,
-                  {
-                    format: 'short',
-                  }
-                )}
-              />
+            {txHash === defaultTransactionHash ? (
+              "0x000000.....000000"
+            ) : (
+              <Link href={`${import.meta.env.VITE_DORA_EXPLORER_URL}/tx/${txHash}`} withIcon>
+                {truncateTransactionHash(txHash.valueOf())}
+              </Link>
             )}
-            <Styled.InlineRow>
-              {stringGetter({ key: STRING_KEYS.AVAILABLE_BLOCK })}
-              <Output type={OutputType.Number} value={blockHeight} />
-            </Styled.InlineRow>
           </TableCell>
         ),
       },
-    }) as Record<PendingMigrationsTableColumnKey, ColumnDef<PendingMigrationData>>
-  )[key];
+    } as Record<PendingMigrationsTableColumnKey, ColumnDef<PendingMigrationData>>
+  )[key]);
 
 export const PendingMigrationsTable = ({
   columnKeys = Object.values(PendingMigrationsTableColumnKey),
@@ -121,12 +116,6 @@ export const PendingMigrationsTable = ({
         {showTitle && (
           <Styled.TableTitle>
             <h3>{stringGetter({ key: STRING_KEYS.PENDING_MIGRATIONS })}</h3>
-            {latestBlockHeight && (
-              <span>
-                {stringGetter({ key: STRING_KEYS.LATEST_BLOCK_HEIGHT })}:{' '}
-                <Output type={OutputType.Number} value={latestBlockHeight} />
-              </span>
-            )}
           </Styled.TableTitle>
         )}
         <Styled.Filters>
@@ -134,9 +123,7 @@ export const PendingMigrationsTable = ({
             <Styled.InputContainer label={<Icon iconName={IconName.Search} />} inputID="search">
               <Input
                 id="search"
-                placeholder={stringGetter({
-                  key: STRING_KEYS.SEARCH_DYDX_CHAIN_ADDRESS,
-                })}
+                placeholder="Search vota-ash Chain Address"
                 type={InputType.Search}
                 value={addressSearchFilter}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -158,11 +145,11 @@ export const PendingMigrationsTable = ({
                 items={[
                   {
                     value: PendingMigrationFilter.Mine,
-                    label: stringGetter({ key: STRING_KEYS.MINE }),
+                    label: 'Mine',
                   },
                   {
                     value: PendingMigrationFilter.All,
-                    label: stringGetter({ key: STRING_KEYS.ALL }),
+                    label: 'All',
                   },
                 ]}
                 value={filter}
@@ -185,19 +172,16 @@ export const PendingMigrationsTable = ({
         )}
         slotEmpty={
           <Styled.EmptyText>
-            {stringGetter({
-              key:
-                filter === PendingMigrationFilter.Mine
-                  ? STRING_KEYS.EMPTY_PENDING_MIGRATIONS_MINE
-                  : addressSearchFilter !== ''
-                  ? STRING_KEYS.EMPTY_PENDING_MIGRATIONS_SEARCH
-                  : STRING_KEYS.EMPTY_PENDING_MIGRATIONS_ALL,
-              params: {
-                SEARCH_STRING: (
-                  <Styled.HighlightedText>"{addressSearchFilter}"</Styled.HighlightedText>
-                ),
-              },
-            })}
+            {filter === PendingMigrationFilter.Mine ? (
+              'There are no pending migrations with your Dora vota-ash Chain address currently.'
+            ) : addressSearchFilter !== '' ? (
+              <>
+                No pending migrations found for
+                <Styled.HighlightedText>"{addressSearchFilter}"</Styled.HighlightedText>
+              </>
+            ) : (
+              'There are no pending migrations currently.'
+            )}
           </Styled.EmptyText>
         }
       />

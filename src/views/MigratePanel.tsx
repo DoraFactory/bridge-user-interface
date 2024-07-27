@@ -32,7 +32,7 @@ export const MigratePanel = () => {
         key: STRING_KEYS.FROM_TO,
         params: {
           FROM: <strong>Ethereum</strong>,
-          TO: <strong>dYdX Chain</strong>,
+          TO: <strong>vota-ash Chain</strong>,
         },
       }),
       content: <MigrateFormEditingStep />,
@@ -42,7 +42,7 @@ export const MigratePanel = () => {
       subtitle: stringGetter({
         key: STRING_KEYS.TO,
         params: {
-          TO: <strong>dYdX Chain</strong>,
+          TO: <strong>DORA vota-ash Chain</strong>,
         },
       }),
       content: <MigrateFormPreviewStep />,
