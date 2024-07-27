@@ -63,5 +63,5 @@ The primary license for this project is the GNU Affero General Public License v3
 
 ## How to test Dora token Bridge
 1. Obtain `SepoliaETH` for gas consumption. You can get 0.1SepoliaETH from here: https://faucets.chain.link/sepolia
-2. Import **INF** token in MetaMask for testing using the contract address: `0xe0A1A9e1a0704CE7B6c73988dbb4E2a54B846791`
+2. Import token named `INF` in MetaMask for testing using the contract address: `0xe0A1A9e1a0704CE7B6c73988dbb4E2a54B846791`
 > Bridge contract address: 0x9A3b7A8B2328375080E688820ddB29b420571eec
