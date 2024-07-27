@@ -3,7 +3,7 @@ FROM node:18-alpine AS build
 WORKDIR /app
 
 COPY . .
-
+RUN npm i -g pnpm
 RUN pnpm install
 RUN pnpm run build
 
