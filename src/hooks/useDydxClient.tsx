@@ -24,7 +24,7 @@ const useDydxClientContext = () => {
   // ------ Client Initialization ------ //
   const [compositeClient, setCompositeClient] = useState<CompositeClient>();
 
-  useEffect(() => {
+/*   useEffect(() => {
     (async () => {
       try {
         const initializedClient = await CompositeClient.connect(
@@ -54,7 +54,7 @@ const useDydxClientContext = () => {
         console.error(error);
       }
     })();
-  }, []);
+  }, []); */
 
   // ------ Wallet Methods ------ //
   const getWalletFromEvmSignature = async ({ signature }: { signature: string }) => {

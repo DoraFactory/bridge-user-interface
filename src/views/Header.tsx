@@ -38,13 +38,13 @@ export const Header = () => {
       items: [
         {
           value: 'MIGRATE',
-          label: stringGetter({ key: STRING_KEYS.MIGRATE }),
+          label: 'Migrate',
           active: true,
           href: '/',
         },
         {
           value: 'MORE',
-          label: stringGetter({ key: STRING_KEYS.MORE }),
+          label: 'More',
           subitems: RELEVANT_LINKS.map((linkItem) => ({
             value: linkItem.value,
             slotBefore: linkItem.iconName ? <Icon iconName={linkItem.iconName} /> : undefined,

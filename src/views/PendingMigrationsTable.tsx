@@ -115,7 +115,7 @@ export const PendingMigrationsTable = ({
       <Styled.Header showTitle={showTitle}>
         {showTitle && (
           <Styled.TableTitle>
-            <h3>{stringGetter({ key: STRING_KEYS.PENDING_MIGRATIONS })}</h3>
+            <h3>Pending Migrations</h3>
           </Styled.TableTitle>
         )}
         <Styled.Filters>

@@ -19,7 +19,7 @@ export const TokensBeforeAfterDiagram = () => {
   const detailItems = [
     {
       key: 'before',
-      label: stringGetter({ key: STRING_KEYS.BEFORE }),
+      label: "Before",
       value: (
         <Styled.ValueContainer>
           <Styled.TokenColumn>
@@ -34,12 +34,7 @@ export const TokensBeforeAfterDiagram = () => {
             />
             <Tag>ethDORA</Tag>
             <span>
-              {stringGetter({
-                key: STRING_KEYS.ON_CHAIN,
-                params: {
-                  CHAIN: 'Ethereum',
-                },
-              })}
+              on Ethereum
             </span>
           </Styled.TokenColumn>
         </Styled.ValueContainer>
@@ -47,7 +42,7 @@ export const TokensBeforeAfterDiagram = () => {
     },
     {
       key: 'after',
-      label: stringGetter({ key: STRING_KEYS.AFTER }),
+      label: "After",
       value: (
         <Styled.ValueContainer>
           <Styled.TokenColumn>
@@ -64,12 +59,7 @@ export const TokensBeforeAfterDiagram = () => {
             />
             <Tag>ethDORA</Tag>
             <span>
-              {stringGetter({
-                key: STRING_KEYS.ON_CHAIN,
-                params: {
-                  CHAIN: 'Ethereum',
-                },
-              })}
+              on Ethereum
             </span>
           </Styled.TokenColumn>
           <Styled.TokenColumn>
@@ -86,12 +76,7 @@ export const TokensBeforeAfterDiagram = () => {
             />
             <Tag>DORA</Tag>
             <span>
-              {stringGetter({
-                key: STRING_KEYS.ON_CHAIN,
-                params: {
-                  CHAIN: 'vota-ash Chain',
-                },
-              })}
+              on vota-ash Chain
             </span>
           </Styled.TokenColumn>
         </Styled.ValueContainer>

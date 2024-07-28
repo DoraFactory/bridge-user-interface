@@ -2,7 +2,7 @@ import { useContext, createContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import BigNumber from 'bignumber.js';
 
-import { STRING_KEYS } from '@/constants/localization';
+import { STRING_KEYS, DORA_LONG_SENTENCE } from '@/constants/localization';
 
 import {
   MigrateFormSteps,
@@ -145,9 +145,7 @@ const useMigrateTokenContext = () => {
             return;
           } else if (screenResults?.[destinationAddress!]) {
             setErrorMsg(
-              stringGetter({
-                key: STRING_KEYS.MIGRATION_BLOCKED_MESSAGE_DESTINATION,
-              })
+              DORA_LONG_SENTENCE.MIGRATION_BLOCKED_MESSAGE_DESTINATION
             );
             return;
           }

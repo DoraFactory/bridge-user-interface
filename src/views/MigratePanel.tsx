@@ -5,7 +5,7 @@ import breakpoints from '@/styles/breakpoints';
 import { formMixins } from '@/styles/formMixins';
 import { layoutMixins } from '@/styles/layoutMixins';
 
-import { STRING_KEYS } from '@/constants/localization';
+import { STRING_KEYS, DORA_KEYS } from '@/constants/localization';
 import { MigrateFormSteps, TransactionStatus } from '@/constants/migrate';
 
 import { useStringGetter, useMigrateToken } from '@/hooks';
@@ -24,27 +24,30 @@ export const MigratePanel = () => {
 
   const { currentStep, onFormSubmit, transactionStatus, bridgeTxError } = useMigrateToken();
 
+  const getTransactionStatusMessage = () => {
+    if (transactionStatus >= TransactionStatus.Finalized) {
+      return "Sending Successful";
+    }
+    if (bridgeTxError) {
+      return "Migration Failed";
+    }
+    return "Sending In Progress";
+  };
+
   const { slotIcon, title, subtitle, content } = {
     [MigrateFormSteps.Edit]: {
       slotIcon: <Icon iconName={IconName.Migrate} />,
-      title: stringGetter({ key: STRING_KEYS.MIGRATE }),
-      subtitle: stringGetter({
-        key: STRING_KEYS.FROM_TO,
-        params: {
-          FROM: <strong>Ethereum</strong>,
-          TO: <strong>vota-ash Chain</strong>,
-        },
-      }),
+      title: 'Migrate',
+      subtitle: `From ${DORA_KEYS.ETHEREUM} to ${DORA_KEYS.VOTA_CHAIN}`,
       content: <MigrateFormEditingStep />,
     },
     [MigrateFormSteps.Preview]: {
-      title: stringGetter({ key: STRING_KEYS.CONFIRM_MIGRATION }),
-      subtitle: stringGetter({
-        key: STRING_KEYS.TO,
-        params: {
-          TO: <strong>DORA vota-ash Chain</strong>,
-        },
-      }),
+      title: "Confirm migration",
+      subtitle: (
+        <>
+          To <strong>DORA vota-ash Chain</strong>
+        </>
+      ),
       content: <MigrateFormPreviewStep />,
     },
     [MigrateFormSteps.Confirmed]: {
@@ -56,14 +59,7 @@ export const MigratePanel = () => {
         ) : (
           <Ring withAnimation value={0.25} />
         ),
-      title: stringGetter({
-        key:
-          transactionStatus >= TransactionStatus.Finalized
-            ? STRING_KEYS.SENDING_SUCCESSFUL
-            : bridgeTxError
-            ? STRING_KEYS.MIGRATION_FAILED
-            : STRING_KEYS.SENDING_IN_PROGRESS,
-      }),
+      title: getTransactionStatusMessage(),
       content: <MigrateFormConfirmedStep />,
     },
   }[currentStep];

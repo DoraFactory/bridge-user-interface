@@ -37,10 +37,7 @@ export const PreviewMigrateButtonAndReceipt = ({ isDisabled, isLoading }: Elemen
 
   const getLabel = ({ chain, asset }: { chain: string; asset: string }) => (
     <Styled.InlineRow>
-      {stringGetter({
-        key: STRING_KEYS.BALANCE_ON_CHAIN,
-        params: { CHAIN: chain },
-      })}
+      Balance on Ethereum
       <Tag>{asset}</Tag>
     </Styled.InlineRow>
   );
@@ -103,7 +100,7 @@ export const PreviewMigrateButtonAndReceipt = ({ isDisabled, isLoading }: Elemen
           type={ButtonType.Submit}
           state={{ isLoading, isDisabled }}
         >
-          {stringGetter({ key: STRING_KEYS.PREVIEW_MIGRATION })}
+          Preview Migration
         </Button>
       )}
     </WithDetailsReceipt>

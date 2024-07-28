@@ -35,7 +35,7 @@ export const usePendingMigrationsData = ({
   );
   const [addressSearchFilter, setAddressSearchFilter] = useState<string>('');
 
-  const [PendingMigrations, setPendingMigrations] = useState<PendingMigrationData[]>([]);
+  // const [PendingMigrations, setPendingMigrations] = useState<PendingMigrationData[]>([]);
   const [filteredPendingMigrations, setFilteredPendingMigrations] = useState<
     PendingMigrationData[]
   >([]);
@@ -76,11 +76,16 @@ export const usePendingMigrationsData = ({
     enabled: unprocessedCount > 0,
     queryKey: ['pollPendingMigrations', unprocessedCount],
     queryFn: async () => {
+      // 直接返回 unprocessedRecordsData
+      console.log(`查询未处理的数据。。。。。。。。`)
       return unprocessedRecordsData;
     },
     select: (data) => {
-      if (!data) return [];
-      // let [size, records] = data
+      if (!data) {
+        console.log('Data is undefined or null');
+        return [];
+      }
+      console.log(`data is ${data}`);
       if (Array.isArray(data) && data.length === 2) {
         const [size, records] = data;
         return records.map((record, idx) => ({
@@ -89,16 +94,17 @@ export const usePendingMigrationsData = ({
             'dora',
             fromHex(record.vota.startsWith('0x') ? record.vota.slice(2) : record.vota)
           ),
-          amount: BigNumber(record.amount).shiftedBy(-18)?.toFixed() ?? '0',
+          amount: BigNumber(record.amount).shiftedBy(-18).toFixed(),
           txHash: ethers.hexlify(record.txHash),
         })) as PendingMigrationData[];
       }
-      console.log(`data is ${data}`);
+      console.log(`data is not in expected format: ${data}`);
+      return [];
     },
     refetchInterval: interval,
     staleTime: interval,
   });
-
+  
   console.log(pendingMigrations);
   console.log(`fetch error is ${fetchPendingMigrationsError}`)
 

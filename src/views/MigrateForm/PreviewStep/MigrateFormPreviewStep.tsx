@@ -40,7 +40,7 @@ export const MigrateFormPreviewStep = () => {
       <TokensBeforeAfterDiagram />
 
       <DetailsReceipt
-        header={stringGetter({ key: STRING_KEYS.ESTIMATED_TIMELINE })}
+        header="Estimated timeline"
         headerIcon={<Icon iconName={IconName.Time} />}
         detailItems={[
           {
@@ -48,10 +48,7 @@ export const MigrateFormPreviewStep = () => {
             label: 'Ethereum settlement',
             value: (
               <Tag>
-                {stringGetter({
-                  key: STRING_KEYS.X_SECONDS_LOWERCASED,
-                  params: { X: '0-12' },
-                })}
+                0-12 seconds
               </Tag>
             ),
           },
@@ -60,10 +57,7 @@ export const MigrateFormPreviewStep = () => {
             label: 'Ethereum finalization',
             value: (
               <Tag>
-                {stringGetter({
-                  key: STRING_KEYS.X_MINUTES_LOWERCASED,
-                  params: { X: '~20' },
-                })}
+                ~20 minutes
               </Tag>
             ),
           },
@@ -73,10 +67,7 @@ export const MigrateFormPreviewStep = () => {
             tooltip: 'dydx-chain-settlement',
             value: (
               <Tag>
-                {stringGetter({
-                  key: STRING_KEYS.X_HOURS_LOWERCASED,
-                  params: { X: '~40' },
-                })}
+                ~40 hours
               </Tag>
             ),
           },
@@ -107,9 +98,7 @@ export const MigrateFormPreviewStep = () => {
       )}
 
       <Styled.ButtonRow>
-        <Styled.EditButton onClick={() => resetForm(false)}>
-          {stringGetter({ key: STRING_KEYS.EDIT })}
-        </Styled.EditButton>
+        <Styled.EditButton onClick={() => resetForm(false)}>Edit</Styled.EditButton>
 
         <Styled.ConfirmButton
           action={ButtonAction.Primary}
@@ -122,9 +111,7 @@ export const MigrateFormPreviewStep = () => {
               !isAmountValid,
           }}
         >
-          {stringGetter({
-            key: needTokenAllowance ? STRING_KEYS.APPROVE_ALLOWANCE : STRING_KEYS.CONFIRM_MIGRATION,
-          })}
+          {needTokenAllowance ? 'Approve Allowance' : 'Confirm Migration'}
         </Styled.ConfirmButton>
       </Styled.ButtonRow>
     </>

@@ -81,12 +81,7 @@ export const MigrateFormEditingStep = () => {
       key: 'amount',
       label: (
         <Styled.InlineRow>
-          {stringGetter({
-            key: STRING_KEYS.AVAILABLE_ON_CHAIN,
-            params: {
-              CHAIN: 'Ethereum',
-            },
-          })}
+          Available on Ethereum
           <Tag>ethDORA</Tag>
         </Styled.InlineRow>
       ),
@@ -130,7 +125,7 @@ export const MigrateFormEditingStep = () => {
       <WithDetailsReceipt side="bottom" detailItems={amountDetailItems}>
         <Styled.FormInput
           id="amount"
-          label={stringGetter({ key: STRING_KEYS.AMOUNT })}
+          label="Amount"
           type={InputType.Number}
           onChange={({ floatValue }: NumberFormatValues) => setAmountBN(MustBigNumber(floatValue))}
           value={amountBN?.toFixed(
@@ -138,7 +133,7 @@ export const MigrateFormEditingStep = () => {
             BigNumber.ROUND_DOWN
           )}
           slotRight={renderFormInputButton({
-            label: stringGetter({ key: STRING_KEYS.MAX }),
+            label: 'Max',
             isInputEmpty: !amountBN,
             onClear: () => setAmountBN(undefined),
             onClick: () => ethDYDXBalance && setAmountBN(ethDYDXBalanceBN),
@@ -146,67 +141,36 @@ export const MigrateFormEditingStep = () => {
         />
       </WithDetailsReceipt>
 
-      {/* <RadioGroup
-        items={[
-          {
-            value: DestinationAddressOptions.Other,
-            label: ( */}
-              <Styled.Label>
-                {/* {stringGetter({
-                  key: STRING_KEYS.SEND_TO_ANOTHER_ADDRESS,
-                  params: {
-                    ADDRESS: (
-                      <strong>{stringGetter({ key: STRING_KEYS.DYDX_CHAIN_ADDRESS })}</strong>
-                    ),
-                  },
-                })} */}
-                Send to your vota-ash chain Address
-              </Styled.Label>
-            {/* ), */}
-            {/* slotContent: ( */}
-              <Styled.AdressInputContainer>
-                <Styled.InnerFormInput
-                  id="destination"
-                  onInput={(e: SyntheticInputEvent) => setDestinationAddress(e.target?.value)}
-                  label={
-                    <Styled.DestinationInputLabel>
-                      {/* {stringGetter({ key: STRING_KEYS.DYDX_CHAIN_ADDRESS })} */}
-                      vota-ash chain Address
-                      {isDestinationAddressValid && <Icon iconName={IconName.Check} />}
-                    </Styled.DestinationInputLabel>
-                  }
-                  type={InputType.Text}
-                  value={destinationAddress}
-                  // placeholder={stringGetter({ key: STRING_KEYS.ENTER_ADDRESS })}
-                  placeholder={"Enter vota-ash chain address"}
-                  slotRight={renderFormInputButton({
-                    label: stringGetter({ key: STRING_KEYS.PASTE }),
-                    isInputEmpty: !destinationAddress,
-                    onClear: () => setDestinationAddress(''),
-                    onClick: onPasteAddress,
-                  })}
-                  validationConfig={
-                    destinationAddress &&
-                    !isDestinationAddressValid && {
-                      attached: true,
-                      type: AlertType.Error,
-                      // message: stringGetter({
-                      //   key: isAddressSanctioned(destinationAddress)
-                      //     ? STRING_KEYS.MIGRATION_BLOCKED_MESSAGE_DESTINATION
-                      //     : STRING_KEYS.INVALID_ADDRESS_BODY,
-                      // }),
-                      message: "Please enter a valid DORA vota-ash chain address.",
-                    }
-                  }
-                />
-              </Styled.AdressInputContainer>
-            {/* ),
-          },
-        ]}
-        value={destinationAddressOption}
-        onValueChange={onOptionChange}
-      /> */}
-
+      <Styled.Label>Send to your vota-ash chain Address</Styled.Label>
+      <Styled.AdressInputContainer>
+        <Styled.InnerFormInput
+          id="destination"
+          onInput={(e: SyntheticInputEvent) => setDestinationAddress(e.target?.value)}
+          label={
+            <Styled.DestinationInputLabel>
+              vota-ash chain Address
+              {isDestinationAddressValid && <Icon iconName={IconName.Check} />}
+            </Styled.DestinationInputLabel>
+          }
+          type={InputType.Text}
+          value={destinationAddress}
+          placeholder={'Enter vota-ash chain address'}
+          slotRight={renderFormInputButton({
+            label: "Paste",
+            isInputEmpty: !destinationAddress,
+            onClear: () => setDestinationAddress(''),
+            onClick: onPasteAddress,
+          })}
+          validationConfig={
+            destinationAddress &&
+            !isDestinationAddressValid && {
+              attached: true,
+              type: AlertType.Error,
+              message: 'Please enter a valid DORA vota-ash chain address.',
+            }
+          }
+        />
+      </Styled.AdressInputContainer>
       <Styled.Footer>
         <PreviewMigrateButtonAndReceipt isDisabled={!isAmountValid || !isDestinationAddressValid} />
       </Styled.Footer>

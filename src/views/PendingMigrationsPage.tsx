@@ -37,9 +37,7 @@ export const PendingMigrationsPage = () => {
           onPressedChange={setShowFullDescription}
           slotRight={<CaretDownIcon />}
         >
-          {stringGetter({
-            key: showFullDescription ? STRING_KEYS.VIEW_LESS : STRING_KEYS.VIEW_MORE,
-          })}
+          {showFullDescription ? "View Less" : "View More"}
         </Styled.ViewMoreToggle>
       </Styled.Description>
       <PendingMigrationsTable />

@@ -122,12 +122,7 @@ export const parseWalletError = ({
       break;
     }
     default: {
-      message = stringGetter({
-        key: STRING_KEYS.SOMETHING_WENT_WRONG_WITH_MESSAGE,
-        params: {
-          ERROR_MESSAGE: error.message || stringGetter({ key: STRING_KEYS.UNKNOWN_ERROR }),
-        },
-      });
+      message = `Something went wrong: ${error.message || 'Unknown error'}`;
     }
   }
 

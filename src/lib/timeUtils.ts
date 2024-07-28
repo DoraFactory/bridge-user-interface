@@ -36,19 +36,19 @@ export const getStringsForTimeInterval = (timeInterval: Duration) => {
 
   if (months > 0) {
     timeString = Math.round(months).toString();
-    unitStringKey = STRING_KEYS.MONTHS_ABBREVIATED;
+    unitStringKey = "M";
   } else if (weeks > 0) {
     timeString = Math.round(weeks + days / 7).toString();
-    unitStringKey = STRING_KEYS.WEEKS_ABBREVIATED;
+    unitStringKey = "w";
   } else if (days > 0) {
     timeString = Math.round(days + hours / 24).toString();
-    unitStringKey = STRING_KEYS.DAYS_ABBREVIATED;
+    unitStringKey = "d";
   } else if (hours > 0) {
     timeString = Math.round(hours + minutes / 60).toString();
-    unitStringKey = STRING_KEYS.HOURS_ABBREVIATED;
+    unitStringKey = "h";
   } else {
     timeString = Math.ceil(minutes).toString();
-    unitStringKey = STRING_KEYS.MINUTES_ABBREVIATED;
+    unitStringKey = "m";
   }
 
   return {

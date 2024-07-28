@@ -72,42 +72,14 @@ export const AccountMenu = () => {
                 type={ButtonType.Link}
               />
             </Styled.AddressRow>
-            {/* <Styled.Balance>
-              <Styled.Label>
-                {stringGetter({
-                  key: STRING_KEYS.ASSET_BALANCE,
-                  params: { ASSET: 'DYDX' },
-                })}
-              </Styled.Label>
-              <Styled.BalanceOutput type={OutputType.Asset} value={DYDXBalance} />
-            </Styled.Balance> */}
           </Styled.AccountInfo>
         )
       }
       items={[
-        // onboardingState === OnboardingState.WalletConnected && {
-        //   value: 'ConnectToChain',
-        //   label: (
-        //     <Styled.ConnectToChain>
-        //       <p>{stringGetter({ key: STRING_KEYS.MISSING_KEYS_DESCRIPTION })}</p>
-        //       <OnboardingTriggerButton />
-        //     </Styled.ConnectToChain>
-        //   ),
-        //   onSelect: onRecoverKeys,
-        //   separator: true,
-        // },
-        // onboardingState === OnboardingState.AccountConnected &&
-        //   hdKey && {
-        //     value: 'MnemonicExport',
-        //     icon: <Icon iconName={IconName.ExportKeys} />,
-        //     label: stringGetter({ key: STRING_KEYS.EXPORT_SECRET_PHRASE }),
-        //     highlightColor: 'negative',
-        //     onSelect: () => dispatch(openDialog({ type: DialogTypes.MnemonicExport })),
-        //   },
         {
           value: 'Disconnect',
           icon: <Icon iconName={IconName.BoxClose} />,
-          label: stringGetter({ key: STRING_KEYS.DISCONNECT }),
+          label: "Disconnect",
           highlightColor: 'negative',
           onSelect: () => dispatch(openDialog({ type: DialogTypes.DisconnectWallet })),
         },

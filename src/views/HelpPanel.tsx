@@ -1,6 +1,6 @@
 import styled, { AnyStyledComponent } from 'styled-components';
 
-import { STRING_KEYS } from '@/constants/localization';
+import { STRING_KEYS, DORA_LONG_SENTENCE } from '@/constants/localization';
 import { AppRoute } from '@/constants/routes';
 
 import breakpoints from '@/styles/breakpoints';
@@ -19,9 +19,9 @@ export const HelpPanel = () => {
       <Styled.HelpCard
         slotHeader={
           <Styled.Header>
-            <h3>{stringGetter({ key: STRING_KEYS.MIGRATION_HELP })}</h3>
-            <Link withIcon href="https://www.dydx.foundation/how-to-bridge/">
-              {stringGetter({ key: STRING_KEYS.LEARN_MORE })}
+            <h3>Migration help</h3>
+            <Link withIcon href="https://docs.dorafactory.org/docs">
+              Learn More
             </Link>
           </Styled.Header>
         }
@@ -29,70 +29,41 @@ export const HelpPanel = () => {
         <Accordion
           items={[
             {
-              header: stringGetter({
-                key: STRING_KEYS.MIGRATION_FAQ_DYDX_CHAIN_PORTAL,
-              }),
+              header: DORA_LONG_SENTENCE.MIGRATION_FAQ_DYDX_CHAIN_PORTAL,
+              content: DORA_LONG_SENTENCE.MIGRATION_FAQ_DYDX_CHAIN_PORTAL_ANSWER,
+            },
+            {
+              header: DORA_LONG_SENTENCE.MIGRATION_FAQ_WHAT_TOKENS,
               content: stringGetter({
-                key: STRING_KEYS.MIGRATION_FAQ_DYDX_CHAIN_PORTAL_ANSWER,
-                params: {
-                  HERE: (
-                    <Styled.Link withIcon href="https://dydx.community/dashboard/proposal/15">
-                      {stringGetter({ key: STRING_KEYS.HERE })}
-                    </Styled.Link>
-                  ),
-                },
+                key: DORA_LONG_SENTENCE.MIGRATION_FAQ_WHAT_TOKENS_ANSWER,
               }),
             },
             {
-              header: stringGetter({
-                key: STRING_KEYS.MIGRATION_FAQ_WHAT_TOKENS,
-              }),
-              content: stringGetter({
-                key: STRING_KEYS.MIGRATION_FAQ_WHAT_TOKENS_ANSWER,
-              }),
+              header: DORA_LONG_SENTENCE.MIGRATION_FAQ_HOW_LONG,
+              content: DORA_LONG_SENTENCE.MIGRATION_FAQ_HOW_LONG_ANSWER,
             },
             {
-              header: stringGetter({ key: STRING_KEYS.MIGRATION_FAQ_HOW_LONG }),
-              content: stringGetter({
-                key: STRING_KEYS.MIGRATION_FAQ_HOW_LONG_ANSWER,
-              }),
+              header: DORA_LONG_SENTENCE.MIGRATION_FAQ_HOW_TO_TRACK,
+              content: DORA_LONG_SENTENCE.MIGRATION_FAQ_HOW_TO_TRACK_ANSWER,
             },
             {
-              header: stringGetter({
-                key: STRING_KEYS.MIGRATION_FAQ_HOW_TO_TRACK,
-              }),
-              content: stringGetter({
-                key: STRING_KEYS.MIGRATION_FAQ_HOW_TO_TRACK_ANSWER,
-              }),
+              header: DORA_LONG_SENTENCE.MIGRATION_FAQ_GAS_FEES,
+              content: DORA_LONG_SENTENCE.MIGRATION_FAQ_GAS_FEES_ANSWER,
             },
             {
-              header: stringGetter({ key: STRING_KEYS.MIGRATION_FAQ_GAS_FEES }),
-              content: stringGetter({
-                key: STRING_KEYS.MIGRATION_FAQ_GAS_FEES_ANSWER,
-              }),
+              header: DORA_LONG_SENTENCE.MIGRATION_FAQ_WHAT_ADDRESS,
+              content: DORA_LONG_SENTENCE.MIGRATION_FAQ_WHAT_ADDRESS_ANSWER,
             },
             {
-              header: stringGetter({
-                key: STRING_KEYS.MIGRATION_FAQ_WHAT_ADDRESS,
-              }),
-              content: stringGetter({
-                key: STRING_KEYS.MIGRATION_FAQ_WHAT_ADDRESS_ANSWER,
-              }),
-            },
-            {
-              header: stringGetter({
-                key: STRING_KEYS.MIGRATION_FAQ_WRAPPED_TOKENS,
-              }),
-              content: stringGetter({
-                key: STRING_KEYS.MIGRATION_FAQ_WRAPPED_TOKENS_ANSWER,
-              }),
+              header: DORA_LONG_SENTENCE.MIGRATION_FAQ_WRAPPED_TOKENS,
+              content: DORA_LONG_SENTENCE.MIGRATION_FAQ_WRAPPED_TOKENS_ANSWER,
             },
           ]}
         />
       </Styled.HelpCard>
 
       <Styled.TermsLink href={`/#${AppRoute.Terms}`} withIcon>
-        {stringGetter({ key: STRING_KEYS.TERMS_OF_USE })}
+        Terms of Use
       </Styled.TermsLink>
     </Styled.Container>
   );
@@ -102,7 +73,7 @@ const Styled: Record<string, AnyStyledComponent> = {};
 
 Styled.Container = styled.div`
   text-align: center;
-  
+
   @media ${breakpoints.notTablet} {
     width: max-content;
   }
