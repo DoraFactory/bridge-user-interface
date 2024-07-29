@@ -59,7 +59,6 @@ export const usePendingMigrationsData = ({
 
   // Get unprocessedRecords count
   const unprocessedCount = Number(totalRecordsData) - Number(processedRecordsData);
-  console.log(`unprocessedCount is ${unprocessedCount}`);
 
   // Get unprocessed Records Info
   const { data: unprocessedRecordsData } = useContractRead({
@@ -69,6 +68,7 @@ export const usePendingMigrationsData = ({
     args: [unprocessedCount],
     enabled: unprocessedCount > 0,
   });
+  console.log(`unprocessedCount is ${unprocessedCount}`);
 
   console.log(`未处理的Record data为${unprocessedRecordsData}`);
 
