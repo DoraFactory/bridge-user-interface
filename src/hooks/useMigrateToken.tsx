@@ -41,7 +41,7 @@ export const useMigrateToken = () => useContext(MigrateTokenContext)!;
 const useMigrateTokenContext = () => {
   const stringGetter = useStringGetter();
   const { evmAddress, DoraAddress } = useAccounts();
-  const { ethDYDXBalance, refetchBalances } = useAccountBalance();
+  const { ethDORABalance, refetchBalances } = useAccountBalance();
   const { screenAddresses, restrictUser } = useRestrictions();
   const { isMatchingNetwork, matchNetwork, isSwitchingNetwork } = useMatchingEvmNetwork({
     chainId: Number(import.meta.env.VITE_ETH_CHAIN_ID),
@@ -61,16 +61,12 @@ const useMigrateTokenContext = () => {
   );
 
   useEffect(() => {
-    setDestinationAddress("");
-  }, [DoraAddress]);
-
-  useEffect(() => {
     setAmountBN(undefined);
   }, [evmAddress]);
 
   // Validations
   const isAmountValid = Boolean(
-    MustBigNumber(ethDYDXBalance).gt(0) && amountBN?.gt(0) && amountBN?.lte(ethDYDXBalance ?? 0)
+    MustBigNumber(ethDORABalance).gt(0) && amountBN?.gt(0) && amountBN?.lte(ethDORABalance ?? 0)
   );
 
   const isDestinationAddressValid = useIsDoraAddressValid(destinationAddress);

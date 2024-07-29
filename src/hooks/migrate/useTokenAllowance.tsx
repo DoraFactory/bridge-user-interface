@@ -24,7 +24,7 @@ export const useTokenAllowance = ({
   watch: boolean;
 }) => {
   const { evmAddress } = useAccounts();
-  const { ethDYDXBalance } = useAccountBalance();
+  const { ethDORABalance } = useAccountBalance();
 
   const [needsRefetch, setNeedsRefetch] = useState(false);
 
@@ -54,7 +54,7 @@ export const useTokenAllowance = ({
     functionName: 'approve',
     args: [
       import.meta.env.VITE_BRIDGE_CONTRACT_ADDRESS,
-      MustBigNumber(ethDYDXBalance).shiftedBy(TOKEN_DECIMAL_SHIFT).toFixed(),
+      MustBigNumber(ethDORABalance).shiftedBy(TOKEN_DECIMAL_SHIFT).toFixed(),
     ],
     chainId: Number(import.meta.env.VITE_ETH_CHAIN_ID),
   });

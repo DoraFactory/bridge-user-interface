@@ -27,6 +27,7 @@ export const MigrateFormPreviewStep = () => {
     errorMsg,
     needTokenAllowance,
     isAmountValid,
+    isDestinationAddressValid,
     isApproveTokenLoading,
     approveTokenTxError,
     isBridgePending,
@@ -108,7 +109,8 @@ export const MigrateFormPreviewStep = () => {
             isDisabled:
               (!needTokenAllowance && !(hasAcknowledgedDuration && hasAcknowledgedLocked)) ||
               isBridgePending ||
-              !isAmountValid,
+              !isAmountValid ||
+              !isDestinationAddressValid,
           }}
         >
           {needTokenAllowance ? 'Approve Allowance' : 'Confirm Migration'}

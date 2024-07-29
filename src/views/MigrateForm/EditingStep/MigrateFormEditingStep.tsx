@@ -39,7 +39,7 @@ import { PreviewMigrateButtonAndReceipt } from './PreviewMigrateButtonAndReceipt
 export const MigrateFormEditingStep = () => {
   const stringGetter = useStringGetter();
   const { DoraAddress: accountDoraAddress } = useAccounts();
-  const { ethDYDXBalance } = useAccountBalance();
+  const { ethDORABalance } = useAccountBalance();
   const { isAddressSanctioned } = useRestrictions();
 
   const {
@@ -55,8 +55,8 @@ export const MigrateFormEditingStep = () => {
     DestinationAddressOptions.Account
   );
 
-  const ethDYDXBalanceBN = MustBigNumber(ethDYDXBalance);
-  const newEthDYDXBalanceBN = ethDYDXBalanceBN.minus(amountBN ?? 0);
+  const ethDORABalanceBN = MustBigNumber(ethDORABalance);
+  const newethDORABalanceBN = ethDORABalanceBN.minus(amountBN ?? 0);
 
   const onOptionChange = (option: string) => {
     if (option === DestinationAddressOptions.Other) {
@@ -88,11 +88,11 @@ export const MigrateFormEditingStep = () => {
       value: (
         <DiffOutput
           type={OutputType.Asset}
-          value={ethDYDXBalance?.toString()}
-          newValue={newEthDYDXBalanceBN.toString()}
+          value={ethDORABalance?.toString()}
+          newValue={newethDORABalanceBN.toString()}
           sign={NumberSign.Negative}
-          hasInvalidNewValue={newEthDYDXBalanceBN.isNegative()}
-          withDiff={ethDYDXBalance !== undefined && amountBN && amountBN.gt(0)}
+          hasInvalidNewValue={newethDORABalanceBN.isNegative()}
+          withDiff={ethDORABalance !== undefined && amountBN && amountBN.gt(0)}
           roundingMode={BigNumber.ROUND_DOWN}
         />
       ),
@@ -136,7 +136,7 @@ export const MigrateFormEditingStep = () => {
             label: 'Max',
             isInputEmpty: !amountBN,
             onClear: () => setAmountBN(undefined),
-            onClick: () => ethDYDXBalance && setAmountBN(ethDYDXBalanceBN),
+            onClick: () => ethDORABalance && setAmountBN(ethDORABalanceBN),
           })}
         />
       </WithDetailsReceipt>

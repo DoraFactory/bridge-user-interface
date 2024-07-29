@@ -31,7 +31,7 @@ export const PreviewMigrateButtonAndReceipt = ({ isDisabled, isLoading }: Elemen
   const stringGetter = useStringGetter();
   const { DoraAddress, evmAddress } = useAccounts();
   const { amountBN, destinationAddress } = useMigrateToken();
-  const { ethDYDXBalance, DYDXBalance, wethDYDXBalance } = useAccountBalance();
+  const { ethDORABalance, DYDXBalance } = useAccountBalance();
 
   const canAccountMigrate = useSelector(calculateCanAccountMigrate);
 
@@ -44,50 +44,21 @@ export const PreviewMigrateButtonAndReceipt = ({ isDisabled, isLoading }: Elemen
 
   const migrateDetailItems = [
     {
-      key: 'ethDYDXBalance',
+      key: 'ethDORABalance',
       label: getLabel({ chain: 'Ethereum', asset: 'ethDORA' }),
       value: (
         <DiffOutput
           type={OutputType.Asset}
-          value={ethDYDXBalance}
-          newValue={MustBigNumber(ethDYDXBalance)
+          value={ethDORABalance}
+          newValue={MustBigNumber(ethDORABalance)
             .minus(amountBN ?? 0)
             .toNumber()}
           sign={NumberSign.Negative}
-          withDiff={Boolean(ethDYDXBalance !== undefined && amountBN)}
+          withDiff={Boolean(ethDORABalance !== undefined && amountBN)}
           roundingMode={BigNumber.ROUND_DOWN}
         />
       ),
     },
-    // import.meta.env.VITE_BRIDGE_CONTRACT_ADDRESS && {
-    //   key: 'wethDYDXBalance',
-    //   label: getLabel({ chain: 'Ethereum', asset: 'wethDYDX' }),
-    //   value: (
-    //     <DiffOutput
-    //       type={OutputType.Asset}
-    //       value={wethDYDXBalance}
-    //       newValue={amountBN?.plus(wethDYDXBalance ?? 0).toNumber() ?? 0}
-    //       sign={NumberSign.Positive}
-    //       withDiff={Boolean(wethDYDXBalance !== undefined && amountBN)}
-    //       roundingMode={BigNumber.ROUND_DOWN}
-    //     />
-    //   ),
-    // },
-    // DoraAddress &&
-    //   DoraAddress === destinationAddress && {
-    //     key: 'DYDXBalance',
-    //     label: getLabel({ chain: 'dYdX Chain', asset: 'DYDX' }),
-    //     value: (
-    //       <DiffOutput
-    //         type={OutputType.Asset}
-    //         value={DYDXBalance}
-    //         newValue={amountBN?.plus(DYDXBalance ?? 0).toNumber() ?? 0}
-    //         sign={NumberSign.Positive}
-    //         withDiff={Boolean(DYDXBalance !== undefined && amountBN)}
-    //         roundingMode={BigNumber.ROUND_DOWN}
-    //       />
-    //     ),
-    //   },
   ].filter(isTruthy);
 
   return (

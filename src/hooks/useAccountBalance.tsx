@@ -35,7 +35,7 @@ const useAccountBalanceContext = () => {
   console.log(`是否可以进行账户迁移${canAccountMigrate}`)
   console.log(`chain id is ${Number(import.meta.env.VITE_ETH_CHAIN_ID)}`)
 
-  const { data: ethDYDXBalanceData, refetch: refetchEthDYDXBalance } = useBalance({
+  const { data: ethDORABalanceData, refetch: refetchethDORABalance } = useBalance({
     enabled: import.meta.env.VITE_ETH_DORA_ADDRESSS && evmAddress && canAccountMigrate,
     address: evmAddress,
     chainId: Number(import.meta.env.VITE_ETH_CHAIN_ID),
@@ -52,7 +52,7 @@ const useAccountBalanceContext = () => {
 
   console.log(`dydx使用合约查询的余额为${balance}`)
 
-  console.log(`ethDYDXBalanceData is ${ethDYDXBalanceData}`)
+  console.log(`ethDORABalanceData is ${ethDORABalanceData}`)
   const result = useBalance({
     enabled: import.meta.env.VITE_ETH_DORA_ADDRESSS && evmAddress && canAccountMigrate,
     address: evmAddress,
@@ -61,11 +61,6 @@ const useAccountBalanceContext = () => {
   });
   console.log(`result查询结果为${result.toString()}`)
 
-  const { data: wethDYDXBalanceData, refetch: refetchWethDYDXBalance } = useBalance({
-    enabled: import.meta.env.VITE_BRIDGE_CONTRACT_ADDRESS && evmAddress && canAccountMigrate,
-    address: evmAddress,
-    token: import.meta.env.VITE_BRIDGE_CONTRACT_ADDRESS,
-  });
 
   const { data: DYDXBalance, refetch: refetchDYDXBalance } = useQuery({
     enabled: Boolean(import.meta.env.VITE_DYDX_DENOM && DoraAddress !== undefined),
@@ -85,23 +80,20 @@ const useAccountBalanceContext = () => {
         .toString(),
   });
 
-  const { formatted: ethDYDXBalance } = ethDYDXBalanceData || {};
-  const { formatted: wethDYDXBalance } = wethDYDXBalanceData || {};
+  const { formatted: ethDORABalance } = ethDORABalanceData || {};
 
-  console.log(ethDYDXBalance)
+  console.log(ethDORABalance)
 
   const refetchBalances = () => {
     if (!evmAddress || !canAccountMigrate) return;
 
-    refetchEthDYDXBalance();
-    refetchWethDYDXBalance();
+    refetchethDORABalance();
 
     if (DoraAddress !== undefined) refetchDYDXBalance();
   };
 
   return {
-    ethDYDXBalance,
-    wethDYDXBalance,
+    ethDORABalance,
     DYDXBalance,
 
     refetchBalances,
