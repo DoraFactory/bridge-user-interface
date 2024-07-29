@@ -8,7 +8,7 @@ import { AlertType } from '@/constants/alerts';
 import { ButtonAction } from '@/constants/buttons';
 import { STRING_KEYS } from '@/constants/localization';
 
-import { DydxAddress, SIGN_TYPED_DATA } from '@/constants/wallets';
+import { DoraAddress, SIGN_TYPED_DATA } from '@/constants/wallets';
 
 import { useAccounts, useDydxClient, useStringGetter, useMatchingEvmNetwork } from '@/hooks';
 

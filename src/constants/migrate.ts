@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import { DydxAddress } from './wallets';
+import { DoraAddress } from './wallets';
 
 export const DYDX_CHAIN_ESTIMATED_BLOCK_TIME_MS = 1_500;
 export const TOKEN_DECIMAL_SHIFT = 18;
@@ -30,7 +30,7 @@ export enum DestinationAddressOptions {
 
 export type PendingMigrationData = {
   id: number;
-  address: DydxAddress;
+  address: DoraAddress;
   amount: BigNumber;
   txHash: String
 };

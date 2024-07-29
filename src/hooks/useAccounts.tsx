@@ -9,7 +9,7 @@ import { OnboardingState, type EvmDerivedAddresses } from '@/constants/account';
 import { DialogTypes } from '@/constants/dialogs';
 import { LocalStorageKey, LOCAL_STORAGE_VERSIONS } from '@/constants/localStorage';
 
-import { DydxAddress, EthereumAddress, PrivateInformation } from '@/constants/wallets';
+import { DoraAddress, EthereumAddress, PrivateInformation } from '@/constants/wallets';
 
 import { setOnboardingState } from '@/state/account';
 import { openDialog } from '@/state/dialogs';
@@ -75,17 +75,17 @@ const useAccountsContext = () => {
 
   const saveEvmDerivedAccount = ({
     evmAddress,
-    dydxAddress,
+    DoraAddress,
   }: {
     evmAddress: EthereumAddress;
-    dydxAddress?: DydxAddress;
+    DoraAddress?: DoraAddress;
   }) => {
     saveEvmDerivedAddresses({
       ...evmDerivedAddresses,
       version: LOCAL_STORAGE_VERSIONS[LocalStorageKey.EvmDerivedAddresses],
       [evmAddress]: {
         ...evmDerivedAddresses[evmAddress],
-        dydxAddress,
+        DoraAddress,
       },
     });
   };
@@ -125,16 +125,16 @@ const useAccountsContext = () => {
   const { getAccountBalance, getSubaccounts } = useMemo(
     () => ({
       getAccountBalance: async ({
-        dydxAddress,
+        DoraAddress,
         denom = import.meta.env.VITE_DYDX_DENOM,
       }: {
-        dydxAddress: DydxAddress;
+        DoraAddress: DoraAddress;
         denom?: string;
-      }) => await compositeClient?.validatorClient.get.getAccountBalance(dydxAddress, denom),
+      }) => await compositeClient?.validatorClient.get.getAccountBalance(DoraAddress, denom),
 
-      getSubaccounts: async ({ dydxAddress }: { dydxAddress: DydxAddress }) => {
+      getSubaccounts: async ({ DoraAddress }: { DoraAddress: DoraAddress }) => {
         try {
-          const response = await compositeClient?.indexerClient.account.getSubaccounts(dydxAddress);
+          const response = await compositeClient?.indexerClient.account.getSubaccounts(DoraAddress);
           return response?.subaccounts;
         } catch (error) {
           // 404 is expected if the user has no subaccounts
@@ -163,8 +163,8 @@ const useAccountsContext = () => {
 
   const dydxAccounts = useMemo(() => localDydxWallet?.accounts, [localDydxWallet]);
 
-  const dydxAddress = useMemo(
-    () => localDydxWallet?.address as DydxAddress | undefined,
+  const DoraAddress = useMemo(
+    () => localDydxWallet?.address as DoraAddress | undefined,
     [localDydxWallet]
   );
 
@@ -178,9 +178,9 @@ const useAccountsContext = () => {
 
   useEffect(() => {
     if (evmAddress) {
-      saveEvmDerivedAccount({ evmAddress, dydxAddress });
+      saveEvmDerivedAccount({ evmAddress, DoraAddress });
     }
-  }, [evmAddress, dydxAddress]);
+  }, [evmAddress, DoraAddress]);
 
   useEffect(() => {
     (async () => {
@@ -262,7 +262,7 @@ const useAccountsContext = () => {
     hdKey,
     localDydxWallet,
     dydxAccounts,
-    dydxAddress,
+    DoraAddress,
 
     // Onboarding state
     saveHasAcknowledgedTerms,

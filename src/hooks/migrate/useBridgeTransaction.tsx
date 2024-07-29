@@ -6,7 +6,7 @@ import BigNumber from 'bignumber.js';
 
 import { bridgeContractAbi } from '@/constants/abi';
 import { TOKEN_DECIMAL_SHIFT, TransactionStatus } from '@/constants/migrate';
-import { DydxAddress, EthereumAddress } from '@/constants/wallets';
+import { DoraAddress, EthereumAddress } from '@/constants/wallets';
 
 import { useTrackTransactionFinalized } from './useTrackTransactionFinalized';
 import { useIsDoraAddressValid } from '../useIsDoraAddressValid';
@@ -64,7 +64,7 @@ export const useBridgeTransaction = ({
     args: [
       amountBN?.shiftedBy(TOKEN_DECIMAL_SHIFT)?.toFixed() ?? '0',
       isDestinationAddressValid
-        ? `0x${toHex(fromBech32(destinationAddress as DydxAddress).data)}`
+        ? `0x${toHex(fromBech32(destinationAddress as DoraAddress).data)}`
         : '',
     ],
     chainId: Number(import.meta.env.VITE_ETH_CHAIN_ID),
@@ -104,7 +104,7 @@ export const useBridgeTransaction = ({
     queryKey: [
       'pollIsCurrentTransactionAcknowledged',
       {
-        dydxAddress: destinationAddress,
+        DoraAddress: destinationAddress,
         ethBlockHeight: Number(bridgeTxMinedBlockNumber),
       },
     ],

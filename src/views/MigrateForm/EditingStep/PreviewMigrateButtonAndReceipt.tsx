@@ -29,7 +29,7 @@ type ElementProps = {
 
 export const PreviewMigrateButtonAndReceipt = ({ isDisabled, isLoading }: ElementProps) => {
   const stringGetter = useStringGetter();
-  const { dydxAddress, evmAddress } = useAccounts();
+  const { DoraAddress, evmAddress } = useAccounts();
   const { amountBN, destinationAddress } = useMigrateToken();
   const { ethDYDXBalance, DYDXBalance, wethDYDXBalance } = useAccountBalance();
 
@@ -73,8 +73,8 @@ export const PreviewMigrateButtonAndReceipt = ({ isDisabled, isLoading }: Elemen
     //     />
     //   ),
     // },
-    // dydxAddress &&
-    //   dydxAddress === destinationAddress && {
+    // DoraAddress &&
+    //   DoraAddress === destinationAddress && {
     //     key: 'DYDXBalance',
     //     label: getLabel({ chain: 'dYdX Chain', asset: 'DYDX' }),
     //     value: (

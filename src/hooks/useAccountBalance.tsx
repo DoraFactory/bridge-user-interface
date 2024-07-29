@@ -27,7 +27,7 @@ export const useAccountBalance = () => useContext(AccountBalanceContext)!;
 const ACCOUNT_BALANCE_POLLING_INTERVAL = 60_000;
 
 const useAccountBalanceContext = () => {
-  const { evmAddress, dydxAddress, getAccountBalance } = useAccounts();
+  const { evmAddress, DoraAddress, getAccountBalance } = useAccounts();
   const canAccountMigrate = useSelector(calculateCanAccountMigrate);
 
   console.log(`ETH dydx contract address is ${import.meta.env.VITE_ETH_DORA_ADDRESSS}`)
@@ -68,12 +68,12 @@ const useAccountBalanceContext = () => {
   });
 
   const { data: DYDXBalance, refetch: refetchDYDXBalance } = useQuery({
-    enabled: Boolean(import.meta.env.VITE_DYDX_DENOM && dydxAddress !== undefined),
-    queryKey: ['usePollDYDXBalance', { dydxAddress }],
+    enabled: Boolean(import.meta.env.VITE_DYDX_DENOM && DoraAddress !== undefined),
+    queryKey: ['usePollDYDXBalance', { DoraAddress }],
     queryFn: async () => {
-      if (!dydxAddress) return;
+      if (!DoraAddress) return;
       return await getAccountBalance({
-        dydxAddress,
+        DoraAddress,
         denom: import.meta.env.VITE_DYDX_DENOM,
       });
     },
@@ -96,7 +96,7 @@ const useAccountBalanceContext = () => {
     refetchEthDYDXBalance();
     refetchWethDYDXBalance();
 
-    if (dydxAddress !== undefined) refetchDYDXBalance();
+    if (DoraAddress !== undefined) refetchDYDXBalance();
   };
 
   return {

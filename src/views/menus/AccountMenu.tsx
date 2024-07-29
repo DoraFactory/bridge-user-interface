@@ -37,7 +37,7 @@ export const AccountMenu = () => {
   const dispatch = useDispatch();
   const onboardingState = useSelector(getOnboardingState);
 
-  const { evmAddress, walletType, dydxAddress, hdKey } = useAccounts();
+  const { evmAddress, walletType, DoraAddress, hdKey } = useAccounts();
   const { DYDXBalance } = useAccountBalance();
 
   const onRecoverKeys = () => {

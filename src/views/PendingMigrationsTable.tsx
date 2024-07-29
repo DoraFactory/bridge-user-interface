@@ -95,7 +95,7 @@ export const PendingMigrationsTable = ({
   className?: string;
 }) => {
   const stringGetter = useStringGetter();
-  const { dydxAddress } = useAccounts();
+  const { DoraAddress } = useAccounts();
   const { isNotMobile } = useBreakpoints();
 
   const {
@@ -138,7 +138,7 @@ export const PendingMigrationsTable = ({
               )}
             </Styled.InputContainer>
           )}
-          {dydxAddress && (
+          {DoraAddress && (
             <>
               {showAddressSearchInput && <Styled.VerticalSeparator />}
               <Styled.ToggleGroup

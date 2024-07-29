@@ -31,12 +31,12 @@ export enum EvmDerivedAccountStatus {
   Derived,
 }
 
-import type { DydxAddress, EthereumAddress } from './wallets';
+import type { DoraAddress, EthereumAddress } from './wallets';
 
 export type EvmDerivedAddresses = {
   version?: string;
   [EthereumAddress: EthereumAddress]: {
     encryptedSignature?: string;
-    dydxAddress?: DydxAddress;
+    DoraAddress?: DoraAddress;
   };
 };

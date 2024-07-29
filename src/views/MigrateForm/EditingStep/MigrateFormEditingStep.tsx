@@ -38,7 +38,7 @@ import { PreviewMigrateButtonAndReceipt } from './PreviewMigrateButtonAndReceipt
 
 export const MigrateFormEditingStep = () => {
   const stringGetter = useStringGetter();
-  const { dydxAddress: accountDoraAddress } = useAccounts();
+  const { DoraAddress: accountDoraAddress } = useAccounts();
   const { ethDYDXBalance } = useAccountBalance();
   const { isAddressSanctioned } = useRestrictions();
 

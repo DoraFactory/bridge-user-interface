@@ -11,7 +11,7 @@ import {
   TOKEN_DECIMAL_SHIFT,
 } from '@/constants/migrate';
 
-import { DydxAddress } from '@/constants/wallets';
+import { DoraAddress } from '@/constants/wallets';
 
 import { MustBigNumber } from '@/lib/numbers';
 
@@ -26,12 +26,12 @@ export const usePendingMigrationsData = ({
 }: {
   interval?: number;
 } = {}) => {
-  const { dydxAddress, evmAddress } = useAccounts();
+  const { DoraAddress, evmAddress } = useAccounts();
   const { compositeClient } = useDydxClient();
   // const [unprocessedCount, setUnprocessedCount] = useState();
 
   const [filter, setFilter] = useState(
-    dydxAddress ? PendingMigrationFilter.Mine : PendingMigrationFilter.All
+    DoraAddress ? PendingMigrationFilter.Mine : PendingMigrationFilter.All
   );
   const [addressSearchFilter, setAddressSearchFilter] = useState<string>('');
 

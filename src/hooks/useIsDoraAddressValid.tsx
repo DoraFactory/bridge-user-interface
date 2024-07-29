@@ -21,7 +21,7 @@ function isValidAddress(address: string): boolean {
 }
 
 export const useIsDoraAddressValid = (doraAddress?: string) => {
-  const { dydxAddress: accountDoraAddress } = useAccounts();
+  const { DoraAddress: accountDoraAddress } = useAccounts();
   const { isAddressSanctioned } = useRestrictions();
 
   return useMemo(

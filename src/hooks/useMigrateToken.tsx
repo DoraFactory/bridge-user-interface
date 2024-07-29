@@ -40,7 +40,7 @@ export const useMigrateToken = () => useContext(MigrateTokenContext)!;
 
 const useMigrateTokenContext = () => {
   const stringGetter = useStringGetter();
-  const { evmAddress, dydxAddress } = useAccounts();
+  const { evmAddress, DoraAddress } = useAccounts();
   const { ethDYDXBalance, refetchBalances } = useAccountBalance();
   const { screenAddresses, restrictUser } = useRestrictions();
   const { isMatchingNetwork, matchNetwork, isSwitchingNetwork } = useMatchingEvmNetwork({
@@ -57,12 +57,12 @@ const useMigrateTokenContext = () => {
   const [errorMsg, setErrorMsg] = useState<string | React.ReactNode[] | undefined>();
   const [amountBN, setAmountBN] = useState<BigNumber | undefined>();
   const [destinationAddress, setDestinationAddress] = useState<string | undefined>(
-    dydxAddress as string | undefined
+    DoraAddress as string | undefined
   );
 
   useEffect(() => {
     setDestinationAddress("");
-  }, [dydxAddress]);
+  }, [DoraAddress]);
 
   useEffect(() => {
     setAmountBN(undefined);
@@ -114,7 +114,7 @@ const useMigrateTokenContext = () => {
   const resetForm = (shouldClearInputs?: boolean) => {
     if (shouldClearInputs) {
       setAmountBN(undefined);
-      setDestinationAddress(dydxAddress);
+      setDestinationAddress(DoraAddress);
     }
     setCurrentStep(MigrateFormSteps.Edit);
   };
@@ -136,11 +136,11 @@ const useMigrateTokenContext = () => {
 
         try {
           const screenResults = await screenAddresses({
-            addresses: [evmAddress!, dydxAddress!, destinationAddress!],
+            addresses: [evmAddress!, DoraAddress!, destinationAddress!],
             throwError: true,
           });
 
-          if (screenResults?.[evmAddress as string] || screenResults?.[dydxAddress as string]) {
+          if (screenResults?.[evmAddress as string] || screenResults?.[DoraAddress as string]) {
             restrictUser();
             return;
           } else if (screenResults?.[destinationAddress!]) {
@@ -182,7 +182,7 @@ const useMigrateTokenContext = () => {
           resetForm();
         } else if (transactionStatus === TransactionStatus.Acknowledged) {
           // Show relevant pending migrations
-          if (destinationAddress !== dydxAddress) {
+          if (destinationAddress !== DoraAddress) {
             setFilter(PendingMigrationFilter.All);
             setAddressSearchFilter(destinationAddress ?? '');
           } else {
