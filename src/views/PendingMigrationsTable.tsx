@@ -77,8 +77,8 @@ const getPendingMigrationsTableColumnDef = ({
             {txHash === defaultTransactionHash ? (
               "0x000000.....000000"
             ) : (
-              <Link href={`${import.meta.env.VITE_DORA_EXPLORER_URL}/tx/${txHash}`} withIcon>
-                {truncateTransactionHash(txHash.valueOf())}
+              <Link href={`${import.meta.env.VITE_DORA_EXPLORER_URL}/tx/${txHash.startsWith('0x') ? txHash.slice(2) : txHash}`} withIcon>
+                {truncateTransactionHash((txHash.startsWith('0x') ? txHash.slice(2) : txHash).valueOf())}
               </Link>
             )}
           </TableCell>

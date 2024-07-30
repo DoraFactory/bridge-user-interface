@@ -22,8 +22,8 @@ export const truncateAddress = (address?: string, prefix: string = 'dora') => {
 export const truncateTransactionHash = (address?: string, prefix: string = '') => {
   if (!address) return '';
   const hash = address.replace(prefix, '');
-  const firstHalf = hash.slice(0, 4);
-  const secondHalf = hash.slice(-4);
+  const firstHalf = hash.slice(0, 8);
+  const secondHalf = hash.slice(-8);
   return `${prefix}${firstHalf}...${secondHalf}`;
 };
 
