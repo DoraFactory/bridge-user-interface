@@ -64,7 +64,7 @@ const getPendingMigrationsTableColumnDef = ({
         renderCell: ({ amount }) => (
           <Styled.InlineRow>
             <Output type={OutputType.Asset} value={amount} />
-            <AssetIcon symbol="DYDX" />
+            <AssetIcon symbol="DORA" />
           </Styled.InlineRow>
         ),
       },
