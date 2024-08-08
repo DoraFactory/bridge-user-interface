@@ -1,7 +1,7 @@
 export enum LocalStorageKey {
   // Onboarding / Accounts
   EvmAddress = 'dydx.migrate.EvmAddress',
-  DydxAddress = 'dydx.migrate.DydxAddress',
+  DoraAddress = 'dydx.migrate.DoraAddress',
   OnboardingSelectedWalletType = 'dydx.migrate.OnboardingSelectedWalletType',
   WalletConnectionType = 'dydx.migrate.WalletConnectionType',
   OnboardingHasAcknowledgedTerms = 'dydx.migrate.OnboardingHasAcknowledgedTerms',

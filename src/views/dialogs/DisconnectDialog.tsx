@@ -29,17 +29,17 @@ export const DisconnectDialog = ({ setIsOpen }: ElementProps) => {
   };
 
   return (
-    <Dialog isOpen setIsOpen={setIsOpen} title={stringGetter({ key: STRING_KEYS.DISCONNECT })}>
+    <Dialog isOpen setIsOpen={setIsOpen} title="Disconnect">
       <Styled.Content>
-        <p>{stringGetter({ key: STRING_KEYS.DISCONNECT_CONFIRMATION })}</p>
+        <p>Are you sure you want to disconnect your account?</p>
         <Styled.ButtonRow>
           <Close asChild>
             <Button action={ButtonAction.Destroy} onClick={disconnect}>
-              {stringGetter({ key: STRING_KEYS.DISCONNECT })}
+              Disconnect
             </Button>
           </Close>
           <Close asChild>
-            <Button onClick={onCancel}>{stringGetter({ key: STRING_KEYS.CANCEL })}</Button>
+            <Button onClick={onCancel}>Cancel</Button>
           </Close>
         </Styled.ButtonRow>
       </Styled.Content>

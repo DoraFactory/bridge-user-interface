@@ -28,14 +28,7 @@ export const ChooseWallet = () => {
         <Styled.AlertMessage type={AlertType.Error}>
           {
             <h4>
-              {stringGetter({
-                key: STRING_KEYS.COULD_NOT_CONNECT,
-                params: {
-                  WALLET: stringGetter({
-                    key: wallets[selectedWalletType].stringKey,
-                  }),
-                },
-              })}
+              Couldn't connect to {wallets[selectedWalletType].stringKey},
             </h4>
           }
           {selectedWalletError}
@@ -51,14 +44,14 @@ export const ChooseWallet = () => {
             slotLeft={<Styled.Icon iconComponent={wallets[walletType].icon} />}
             size={ButtonSize.Small}
           >
-            <div>{stringGetter({ key: wallets[walletType].stringKey })}</div>
+            <div>{wallets[walletType].stringKey}</div>
           </Styled.WalletButton>
         ))}
       </Styled.Wallets>
 
       <Styled.Footer>
         <Link href={aboutWalletsLink} withIcon>
-          {stringGetter({ key: STRING_KEYS.ABOUT_WALLETS })}
+          About wallets
         </Link>
       </Styled.Footer>
     </>

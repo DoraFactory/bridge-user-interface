@@ -12,7 +12,7 @@ import { useAccounts } from './useAccounts';
 
 const useRestrictionContext = () => {
   const { compositeClient } = useDydxClient();
-  const { evmAddress, dydxAddress, disconnect } = useAccounts();
+  const { evmAddress, DoraAddress, disconnect } = useAccounts();
   const dispatch = useDispatch();
 
   const [sanctionedAddresses, setSanctionedAddresses] = useState<Set<string>>(new Set());
@@ -92,17 +92,17 @@ const useRestrictionContext = () => {
   }, [screenAddresses, evmAddress]);
 
   useEffect(() => {
-    if (dydxAddress) screenAddresses({ addresses: [dydxAddress] });
-  }, [screenAddresses, dydxAddress]);
+    if (DoraAddress) screenAddresses({ addresses: [DoraAddress] });
+  }, [screenAddresses, DoraAddress]);
 
   useEffect(() => {
     if (
       (evmAddress && isAddressSanctioned(evmAddress)) ||
-      (dydxAddress && isAddressSanctioned(dydxAddress))
+      (DoraAddress && isAddressSanctioned(DoraAddress))
     ) {
       restrictUser();
     }
-  }, [evmAddress, dydxAddress, isAddressSanctioned, restrictUser]);
+  }, [evmAddress, DoraAddress, isAddressSanctioned, restrictUser]);
 
   return {
     screenAddresses,

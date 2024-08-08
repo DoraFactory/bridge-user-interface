@@ -40,7 +40,7 @@ export const FinalizingCountdownTimer = ({
 
   return (
     <Styled.Tag>
-      {stringGetter({ key: STRING_KEYS.FINALIZING })}
+      Finalizing
       {secondsRemaining > 0 ? ` ${minutes}:${seconds}` : '...'}
     </Styled.Tag>
   );

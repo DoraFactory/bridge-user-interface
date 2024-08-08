@@ -38,7 +38,7 @@ export const AcknowledgeTermsDialog = ({ setIsOpen }: ElementProps) => {
       isOpen
       preventClose
       setIsOpen={setIsOpen}
-      title={stringGetter({ key: STRING_KEYS.ACKNOWLEDGE_TERMS })}
+      title="Acknowledge terms"
     >
       <Styled.Content>
         <Checkbox
@@ -59,7 +59,7 @@ export const AcknowledgeTermsDialog = ({ setIsOpen }: ElementProps) => {
             onClick={onContinue}
             state={{ isDisabled: !hasAcknowledged }}
           >
-            {stringGetter({ key: STRING_KEYS.CONTINUE })}
+            Continue
           </Button>
         </Close>
       </Styled.Content>

@@ -1,17 +1,14 @@
-import styled, { AnyStyledComponent } from "styled-components";
+import styled, { AnyStyledComponent } from 'styled-components';
 
-import { PreventCloseDialogProps } from "@/constants/dialogs";
-import { STRING_KEYS } from "@/constants/localization";
-import { useStringGetter } from "@/hooks";
-import { layoutMixins } from "@/styles/layoutMixins";
+import { PreventCloseDialogProps } from '@/constants/dialogs';
+import { STRING_KEYS } from '@/constants/localization';
+import { useStringGetter } from '@/hooks';
+import { layoutMixins } from '@/styles/layoutMixins';
 
-import { Dialog } from "@/components/Dialog";
-import { Icon, IconName } from "@/components/Icon";
+import { Dialog } from '@/components/Dialog';
+import { Icon, IconName } from '@/components/Icon';
 
-export const RestrictedGeoDialog = ({
-  preventClose,
-  setIsOpen,
-}: PreventCloseDialogProps) => {
+export const RestrictedGeoDialog = ({ preventClose, setIsOpen }: PreventCloseDialogProps) => {
   const stringGetter = useStringGetter();
 
   return (
@@ -19,11 +16,13 @@ export const RestrictedGeoDialog = ({
       isOpen
       preventClose={preventClose}
       setIsOpen={setIsOpen}
-      title={stringGetter({ key: STRING_KEYS.REGION_NOT_PERMITTED_TITLE })}
+      title="Restricted"
       slotIcon={<Styled.Icon iconName={IconName.Warning} />}
     >
       <Styled.Content>
-        {stringGetter({ key: STRING_KEYS.MIGRATION_BLOCKED_MESSAGE })}
+        Because you appear to be a resident of, or using this user interface from, a jurisdiction
+        that violates our terms of use, or have engaged in activity that violates our terms of use,
+        you have been blocked and this transaction cannot be completed.
       </Styled.Content>
     </Dialog>
   );

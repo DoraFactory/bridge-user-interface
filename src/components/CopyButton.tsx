@@ -54,7 +54,7 @@ export const CopyButton = ({
       onClick={onCopy}
     >
       <Icon iconName={IconName.Copy} />
-      {children ?? stringGetter({ key: copied ? STRING_KEYS.COPIED : STRING_KEYS.COPY })}
+      {children ?? (copied ? 'Copied' : 'Copy')}
     </Button>
   );
 };

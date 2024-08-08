@@ -36,7 +36,7 @@ export const MoreLinksDialog = ({ setIsOpen }: DialogProps) => {
   ];
 
   return (
-    <Dialog isOpen setIsOpen={setIsOpen} title={stringGetter({ key: STRING_KEYS.RELEVANT_LINKS })}>
+    <Dialog isOpen setIsOpen={setIsOpen} title="Relevant Links">
       <Styled.NavigationMenu items={navItems} orientation="vertical" />
     </Dialog>
   );

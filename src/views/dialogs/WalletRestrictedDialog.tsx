@@ -19,11 +19,11 @@ export const WalletRestrictedDialog = ({
       isOpen
       preventClose={preventClose}
       setIsOpen={setIsOpen}
-      title={stringGetter({ key: STRING_KEYS.WALLET_RESTRICTED_ERROR_TITLE })}
+      title="Wallet Restricted"
       slotIcon={<Styled.Icon iconName={IconName.Warning} />}
     >
       <Styled.Content>
-        {stringGetter({ key: STRING_KEYS.MIGRATION_BLOCKED_MESSAGE })}
+        Because you appear to be a resident of, or using this user interface from, a jurisdiction that violates our terms of use, or have engaged in activity that violates our terms of use, you have been blocked and this transaction cannot be completed.
       </Styled.Content>
     </Dialog>
   );

@@ -23,6 +23,14 @@ export const TimeoutButton = ({
 
   const secondsLeft = Math.max(0, (timeoutDeadline - now) / 1000);
 
+  const getWaitSecondsMessage = (secondsLeft: number) => {
+    const seconds = Math.ceil(secondsLeft);
+    return seconds === 1
+      ? `Wait for ${seconds} second`
+      : `Wait for ${seconds} seconds`;
+  };
+  const waitSecondsMessage = secondsLeft ? getWaitSecondsMessage(secondsLeft) : children;
+
   return (
     <Button
       {...otherProps}
@@ -34,17 +42,7 @@ export const TimeoutButton = ({
           (otherProps?.state as ButtonStateConfig)?.isDisabled,
       }}
     >
-      {secondsLeft
-        ? stringGetter({
-            key:
-              Math.ceil(secondsLeft) === 1
-                ? STRING_KEYS.WAIT_SECONDS_SINGULAR
-                : STRING_KEYS.WAIT_SECONDS,
-            params: {
-              SECONDS: String(Math.ceil(secondsLeft)),
-            },
-          })
-        : children}
+      {waitSecondsMessage}
     </Button>
   );
 };

@@ -4,7 +4,7 @@ import { useBreakpoints } from './useBreakpoints';
 import { useDialogArea } from './useDialogArea';
 import { useDydxClient } from './useDydxClient';
 import { useInitializePage } from './useInitializePage';
-import { useIsDydxAddressValid } from './useIsDydxAddressValid';
+import { useIsDoraAddressValid } from './useIsDoraAddressValid';
 import { useLocaleSeparators } from './useLocaleSeparators';
 import { useLocalStorage } from './useLocalStorage';
 import { useMatchingEvmNetwork } from './useMatchingEvmNetwork';
@@ -23,7 +23,7 @@ export {
   useDialogArea,
   useDydxClient,
   useInitializePage,
-  useIsDydxAddressValid,
+  useIsDoraAddressValid,
   useLocaleSeparators,
   useLocalStorage,
   useMatchingEvmNetwork,

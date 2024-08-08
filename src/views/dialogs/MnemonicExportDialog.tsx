@@ -109,7 +109,7 @@ export const MnemonicExportDialog = ({ setIsOpen }: DialogProps) => {
                   </Styled.Word>
                 ))}
               </Styled.List>
-              <span>{stringGetter({ key: STRING_KEYS.CLICK_TO_SHOW })}</span>
+              <span>Click to show</span>
             </Styled.WordList>
           }
         >
@@ -124,9 +124,7 @@ export const MnemonicExportDialog = ({ setIsOpen }: DialogProps) => {
       isOpen
       setIsOpen={setIsOpen}
       title={title}
-      description={stringGetter({
-        key: STRING_KEYS.REVEAL_SECRET_PHRASE_DESCRIPTION,
-      })}
+      description="Your secret phrase is a set of 24 words used to backup and access your account."
     >
       <Styled.Content>{content}</Styled.Content>
     </Styled.Dialog>
