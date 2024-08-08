@@ -20,7 +20,8 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
   WAGMI_SUPPORTED_CHAINS,
   [
     // use infura api key
-    infuraProvider({apiKey: import.meta.env.VITE_INFURA_API_KEY}),
+    // infuraProvider({apiKey: import.meta.env.VITE_INFURA_API_KEY}),
+    infuraProvider({apiKey: "bee5140d9d2243d580ef49ade75c2356"}),
     publicProvider(),
   ].filter(isTruthy)
 );
