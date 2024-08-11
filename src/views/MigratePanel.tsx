@@ -45,7 +45,7 @@ export const MigratePanel = () => {
       title: "Confirm migration",
       subtitle: (
         <>
-          To <strong>DORA vota-ash Chain</strong>
+          To <strong>Dora Vota</strong>
         </>
       ),
       content: <MigrateFormPreviewStep />,

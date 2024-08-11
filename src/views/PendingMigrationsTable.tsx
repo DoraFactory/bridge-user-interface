@@ -50,7 +50,7 @@ const getPendingMigrationsTableColumnDef = ({
       [PendingMigrationsTableColumnKey.Address]: {
         columnKey: PendingMigrationsTableColumnKey.Address,
         getCellValue: (row) => row.address,
-        label: 'Dora vota-ash Chain Address',
+        label: 'Dora Vota Address',
         renderCell: ({ address }) => (
           <CopyButton buttonType="text" value={address}>
             {truncateAddress(address)}
@@ -123,7 +123,7 @@ export const PendingMigrationsTable = ({
             <Styled.InputContainer label={<Icon iconName={IconName.Search} />} inputID="search">
               <Input
                 id="search"
-                placeholder="Search vota-ash Chain Address"
+                placeholder="Search Dora Vota Address"
                 type={InputType.Search}
                 value={addressSearchFilter}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -173,7 +173,7 @@ export const PendingMigrationsTable = ({
         slotEmpty={
           <Styled.EmptyText>
             {filter === PendingMigrationFilter.Mine ? (
-              'There are no pending migrations with your Dora vota-ash Chain address currently.'
+              'There are no pending migrations with your Dora Vota address currently.'
             ) : addressSearchFilter !== '' ? (
               <>
                 No pending migrations found for

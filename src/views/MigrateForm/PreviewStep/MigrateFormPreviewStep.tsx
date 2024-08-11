@@ -64,8 +64,8 @@ export const MigrateFormPreviewStep = () => {
           },
           {
             key: 'dydx_settlement',
-            label: 'Dora vota-ash Chain settlement',
-            tooltip: 'dydx-chain-settlement',
+            label: 'Dora Vota settlement',
+            // tooltip: 'dydx-chain-settlement',
             value: (
               <Tag>
                 ~40 hours

@@ -131,7 +131,7 @@ export const MigrateFormConfirmedStep = () => {
           },
           {
             key: 'DYDX',
-            label: 'DORA on vota-ash Chain',
+            label: 'DORA on Dora Vota',
             value: (
               <Styled.Output
                 type={OutputType.Asset}

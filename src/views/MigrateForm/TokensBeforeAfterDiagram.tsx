@@ -76,7 +76,7 @@ export const TokensBeforeAfterDiagram = () => {
             />
             <Tag>DORA</Tag>
             <span>
-              on vota-ash Chain
+              on Dora Vota
             </span>
           </Styled.TokenColumn>
         </Styled.ValueContainer>

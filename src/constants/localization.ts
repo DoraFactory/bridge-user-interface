@@ -25,18 +25,18 @@ export enum SupportedLocales {
 }
 
 export const DORA_KEYS = {
-  "DORA_CHAIN_SETTLEMENT": 'Dora vota-ash Chain settlement',
-  "DORA_EXPLORER" : 'Dora vota explorer',
-  "VOTA_CHAIN" : 'vota-ash Chain',
+  "DORA_CHAIN_SETTLEMENT": 'Dora Vota settlement',
+  "DORA_EXPLORER" : 'Dora Vota Explorer',
+  "VOTA_CHAIN" : 'Dora Vota',
   "ETHEREUM": 'Ethereum'
 }
 
 export const DORA_LONG_SENTENCE = {
-  "CONFIRM_MIGRATION_DISCLAIMER_1": "I understand it may take 24~48 hours until my tokens are available on the Dora vota-ash Chain.",
+  "CONFIRM_MIGRATION_DISCLAIMER_1": "I understand it may take 24~48 hours until my tokens are available on the Dora Vota.",
   "CONFIRM_MIGRATION_DISCLAIMER_2": "I understand that my ethDORA tokens will be sent to a black hole address for permanent destruction in the Bridge Smart Contract and irrecoverable.",
-  "PENDING_MIGRATIONS_DESCRIPTION_I": 'This table lists all ongoing DORA token migrations from Ethereum to the Dora vota-ash Chain. It refreshes periodically or upon a manual page reload.',
+  "PENDING_MIGRATIONS_DESCRIPTION_I": 'This table lists all ongoing DORA token migrations from Ethereum to the Dora Vota. It refreshes periodically or upon a manual page reload.',
   "PENDING_MIGRATIONS_DESCRIPTION_II": 'Once a pending migration is listed, the migration will be completed within ~48 hours. Once the migration has been settled, it will be removed from this table during the next automatic update or when the page is manually refreshed.',
-  "PENDING_MIGRATIONS_DESCRIPTION_III": 'However, you can see all your migration records (including those that are pending or have been settled) in the "Mine" option. Please note that if the migration is pending, the Transaction Hash will display as 0x0000...00000. If your migration is settled, it will display the link of transaction hash of the successful migration on the Dora vota-ash network.',
+  "PENDING_MIGRATIONS_DESCRIPTION_III": 'However, you can see all your migration records (including those that are pending or have been settled) in the "Mine" option. Please note that if the migration is pending, the Transaction Hash will display as 0x0000...00000. If your migration is settled, it will display the link of transaction hash of the successful migration on the Dora Vota.',
   "MIGRATION_FAQ_DYDX_CHAIN_PORTAL": "What is the dYdX Chain Portal?",
   "MIGRATION_FAQ_DYDX_CHAIN_PORTAL_ANSWER": "The dYdX Community elected to migrate Ethereum-based DYDX to dYdX Chain (vote {HERE}). This portal assists Ethereum-based DYDX holders to engage with the Ethereum smart contract to migrate their DYDX tokens from Ethereum to dYdX Chain.",
   "MIGRATION_FAQ_GAS_FEES_ANSWER": "Yes, holders who engage with the portal will have to pay gas costs on Ethereum. Users will not have to pay gas costs on dYdX Chain.",

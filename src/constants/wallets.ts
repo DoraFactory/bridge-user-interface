@@ -167,13 +167,13 @@ export const COSMOS_DERIVATION_PATH = "m/44'/118'/0'/0/0";
 export const SIGN_TYPED_DATA = {
   primaryType: 'dYdx',
   domain: {
-    name: 'Dora Vota-ash Chain',
+    name: 'Dora Vota',
   },
   types: {
     dYdx: [{ name: 'action', type: 'string' }],
   },
   message: {
-    action: 'Dora Token Migration Onboarding',
+    action: 'DORA Token Migration Onboarding',
   },
 } as const;
 

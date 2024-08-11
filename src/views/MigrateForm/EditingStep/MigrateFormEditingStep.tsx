@@ -141,20 +141,20 @@ export const MigrateFormEditingStep = () => {
         />
       </WithDetailsReceipt>
 
-      <Styled.Label>Send to your vota-ash chain Address</Styled.Label>
+      <Styled.Label>Send to your Dora Vota Address</Styled.Label>
       <Styled.AdressInputContainer>
         <Styled.InnerFormInput
           id="destination"
           onInput={(e: SyntheticInputEvent) => setDestinationAddress(e.target?.value)}
           label={
             <Styled.DestinationInputLabel>
-              vota-ash chain Address
+              Dora Vota Address
               {isDestinationAddressValid && <Icon iconName={IconName.Check} />}
             </Styled.DestinationInputLabel>
           }
           type={InputType.Text}
           value={destinationAddress}
-          placeholder={'Enter vota-ash chain address'}
+          placeholder={'Enter Dora Vota address'}
           slotRight={renderFormInputButton({
             label: "Paste",
             isInputEmpty: !destinationAddress,
@@ -166,7 +166,7 @@ export const MigrateFormEditingStep = () => {
             !isDestinationAddressValid && {
               attached: true,
               type: AlertType.Error,
-              message: 'Please enter a valid DORA vota-ash chain address.',
+              message: 'Please enter a valid DORA Vota address.',
             }
           }
         />
