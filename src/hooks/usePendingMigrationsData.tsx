@@ -35,7 +35,8 @@ export const usePendingMigrationsData = ({
   );
   const [addressSearchFilter, setAddressSearchFilter] = useState<string>('');
 
-  // const [PendingMigrations, setPendingMigrations] = useState<PendingMigrationData[]>([]);
+  const [pendingMigrations, setPendingMigrations] = useState<PendingMigrationData[]>([]);
+  const [refetchPendingMigrations, setRefetchPendingMigrations] = useState(null);
   const [filteredPendingMigrations, setFilteredPendingMigrations] = useState<
     PendingMigrationData[]
   >([]);
@@ -72,42 +73,46 @@ export const usePendingMigrationsData = ({
 
   console.log(`未处理的Record data为${unprocessedRecordsData}`);
 
-  const { data: pendingMigrations, refetch: refetchPendingMigrations, error: fetchPendingMigrationsError } = useQuery({
-    enabled: unprocessedCount > 0,
-    queryKey: ['pollPendingMigrations', unprocessedCount],
-    queryFn: async () => {
-      // 直接返回 unprocessedRecordsData
-      console.log(`查询未处理的数据。。。。。。。。`)
-      return unprocessedRecordsData;
-    },
-    select: (data) => {
-      if (!data) {
-        console.log('Data is undefined or null');
-        return [];
-      }
-      console.log(`data is ${data}`);
-      if (Array.isArray(data) && data.length === 2) {
-        const [size, records] = data;
-        return records.map((record, idx) => ({
-          id: idx,
-          address: toBech32(
-            'dora',
-            fromHex(record.vota.startsWith('0x') ? record.vota.slice(2) : record.vota)
-          ),
-          amount: BigNumber(record.amount).shiftedBy(-18).toFixed(),
-          txHash: ethers.hexlify(record.txHash),
-        })) as PendingMigrationData[];
-      }
-      console.log(`data is not in expected format: ${data}`);
-      return [];
-    },
-    refetchInterval: interval,
-    staleTime: interval,
-  });
-  
-  console.log(pendingMigrations);
-  console.log(`fetch error is ${fetchPendingMigrationsError}`)
+  useEffect(() => {
+    if (unprocessedCount > 0) {
+      const fetchData = async () => {
+        try {
+          console.log(`查询未处理的数据。。。。。。。。`);
+          const data = unprocessedRecordsData;
+          if (!data) {
+            console.log('Data is undefined or null');
+            setPendingMigrations([]);
+            return;
+          }
+          console.log(`data is ${data}`);
+          if (Array.isArray(data) && data.length === 2) {
+            const [size, records] = data;
+            const mappedData = records.map((record, idx) => ({
+              id: idx,
+              address: toBech32(
+                'dora',
+                fromHex(record.vota.startsWith('0x') ? record.vota.slice(2) : record.vota)
+              ),
+              amount: BigNumber(record.amount).shiftedBy(-18).toFixed(),
+              txHash: ethers.hexlify(record.txHash),
+            })) as PendingMigrationData[];
+            setPendingMigrations(mappedData);
+          } else {
+            console.log(`data is not in expected format: ${data}`);
+            setPendingMigrations([]);
+          }
+        } catch (error) {
+          console.error('Error fetching pending migrations:', error);
+          setPendingMigrations([]);
+        }
+      };
 
+      fetchData();
+
+      const intervalId = setInterval(fetchData, interval);
+      return () => clearInterval(intervalId);
+    }
+  }, [unprocessedCount, unprocessedRecordsData, interval]);
 
   // Get an evm address's all records
   const { data: evmUserRecords, error } = useContractRead({
