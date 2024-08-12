@@ -93,10 +93,10 @@ const useMigrateTokenContext = () => {
   const { setAddressSearchFilter, setFilter, refetchPendingMigrations } =
     usePendingMigrationsData();
 
-  useEffect(() => {
+/*   useEffect(() => {
     // Found current corresponding pending migration
     if (transactionStatus === TransactionStatus.Acknowledged) refetchPendingMigrations();
-  }, [transactionStatus]);
+  }, [transactionStatus]); */
 
   useEffect(() => {
     // Reset statuses when editing or starting new migration

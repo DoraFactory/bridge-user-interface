@@ -131,9 +131,7 @@ export const usePendingMigrationsData = ({
     }
 
     let transformedUserRecords = [];
-    // 假设 records 是对象或单个值，需要将其转换为数组
     if (evmUserRecords) {
-      // 根据 records 的实际数据结构进行转换，这里假设它是一个对象
       transformedUserRecords = Object.values(evmUserRecords);
     }
 

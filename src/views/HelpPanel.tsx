@@ -29,34 +29,36 @@ export const HelpPanel = () => {
         <Accordion
           items={[
             {
-              header: DORA_LONG_SENTENCE.MIGRATION_FAQ_DYDX_CHAIN_PORTAL,
-              content: DORA_LONG_SENTENCE.MIGRATION_FAQ_DYDX_CHAIN_PORTAL_ANSWER,
+              header: DORA_LONG_SENTENCE.MIGRATION_FAQ_DORA_CHAIN_PORTAL,
+              content: DORA_LONG_SENTENCE.MIGRATION_FAQ_DORA_CHAIN_PORTAL_ANSWER,
             },
             {
-              header: DORA_LONG_SENTENCE.MIGRATION_FAQ_WHAT_TOKENS,
-              content: stringGetter({
-                key: DORA_LONG_SENTENCE.MIGRATION_FAQ_WHAT_TOKENS_ANSWER,
-              }),
+              header: DORA_LONG_SENTENCE.MIGRATION_FAQ_WHAT_ADDRESS_CAN_INTERACT,
+              content: DORA_LONG_SENTENCE.MIGRATION_FAQ_WHAT_ADDRESS_CAN_INTERACT_ANSWER,
+            },
+            {
+              header: DORA_LONG_SENTENCE.MIGRATION_FAQ_CUSTODY_TOKEN,
+              content: DORA_LONG_SENTENCE.MIGRATION_FAQ_CUSTODY_TOKEN_ANSWER,
             },
             {
               header: DORA_LONG_SENTENCE.MIGRATION_FAQ_HOW_LONG,
               content: DORA_LONG_SENTENCE.MIGRATION_FAQ_HOW_LONG_ANSWER,
             },
             {
-              header: DORA_LONG_SENTENCE.MIGRATION_FAQ_HOW_TO_TRACK,
-              content: DORA_LONG_SENTENCE.MIGRATION_FAQ_HOW_TO_TRACK_ANSWER,
+              header: DORA_LONG_SENTENCE.MIGRATION_FAQ_CONTRACR_TOKEN,
+              content: DORA_LONG_SENTENCE.MIGRATION_FAQ_CONTRACR_TOKEN_ANSWER,
+            },
+            {
+              header: DORA_LONG_SENTENCE.MIGRATION_FAQ_VCDORA_HOLDER,
+              content: DORA_LONG_SENTENCE.MIGRATION_FAQ_VCDORA_HOLDER_ANSWER,
             },
             {
               header: DORA_LONG_SENTENCE.MIGRATION_FAQ_GAS_FEES,
               content: DORA_LONG_SENTENCE.MIGRATION_FAQ_GAS_FEES_ANSWER,
             },
             {
-              header: DORA_LONG_SENTENCE.MIGRATION_FAQ_WHAT_ADDRESS,
-              content: DORA_LONG_SENTENCE.MIGRATION_FAQ_WHAT_ADDRESS_ANSWER,
-            },
-            {
-              header: DORA_LONG_SENTENCE.MIGRATION_FAQ_WRAPPED_TOKENS,
-              content: DORA_LONG_SENTENCE.MIGRATION_FAQ_WRAPPED_TOKENS_ANSWER,
+              header: DORA_LONG_SENTENCE.MIGRATION_FAQ_HOW_TO_TRACK,
+              content: DORA_LONG_SENTENCE.MIGRATION_FAQ_HOW_TO_TRACK_ANSWER,
             },
           ]}
         />
