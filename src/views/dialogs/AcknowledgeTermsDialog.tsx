@@ -58,7 +58,7 @@ export const AcknowledgeTermsDialog = ({ setIsOpen }: ElementProps) => {
               </span>
             </li>
             <li>
-              <span style={{ fontWeight: 'bold' }}>
+              <span style={{ fontWeight: 'bold', textDecoration: 'underline' }}>
                 Once initiated, your Ethereum DORA tokens will be sent to a burn address and cannot
                 be reversed. And you will receive the DORA Tokens at the Dora Vota network address
                 you entered. Any error you make is irreversible, and we are not liable for any of
