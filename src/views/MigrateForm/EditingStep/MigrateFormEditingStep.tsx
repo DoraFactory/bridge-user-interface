@@ -138,6 +138,14 @@ export const MigrateFormEditingStep = () => {
             onClear: () => setAmountBN(undefined),
             onClick: () => ethDORABalance && setAmountBN(ethDORABalanceBN),
           })}
+          validationConfig={
+            amountBN && !amountBN.gt(0.1) &&
+            {
+              attached: true,
+              type: AlertType.Error,
+              message: 'Please enter a quantity greater than 0.1',
+            }
+          }
         />
       </WithDetailsReceipt>
 

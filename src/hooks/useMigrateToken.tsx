@@ -66,7 +66,7 @@ const useMigrateTokenContext = () => {
 
   // Validations
   const isAmountValid = Boolean(
-    MustBigNumber(ethDORABalance).gt(0) && amountBN?.gt(0) && amountBN?.lte(ethDORABalance ?? 0)
+    MustBigNumber(ethDORABalance).gt(0) && amountBN?.gt(0.1) && amountBN?.lte(ethDORABalance ?? 0)
   );
 
   const isDestinationAddressValid = useIsDoraAddressValid(destinationAddress);
