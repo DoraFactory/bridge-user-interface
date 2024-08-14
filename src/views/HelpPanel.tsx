@@ -67,6 +67,9 @@ export const HelpPanel = () => {
       <Styled.TermsLink href={`/#${AppRoute.Terms}`} withIcon>
         Terms of Use
       </Styled.TermsLink>
+      <Styled.TermsLink href={`/#${AppRoute.Privacy}`} withIcon>
+        Privacy policy
+      </Styled.TermsLink>
     </Styled.Container>
   );
 };
