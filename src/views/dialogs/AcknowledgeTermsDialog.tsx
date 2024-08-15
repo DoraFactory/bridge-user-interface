@@ -82,15 +82,16 @@ export const AcknowledgeTermsDialog = ({ setIsOpen }: ElementProps) => {
               United States Department of the Treasury's Office of Foreign Assets Control, the
               United Nations Security Council, the European Union, or any other government authority
               (“Sanctions”), or if you are a resident of a country or territory that is the subject
-              of Sanctions, or if your use of the interface would violate any laws or regulations,
-              or cause us to violate any laws or regulations (collectively,{' '}
-              <span style={{ fontWeight: 'bold' }}>“Excluded Individual”</span>
+              of Sanctions, or if your use of the interface would violate, or cause us to violate
+              any laws or regulations. Specifically, residents in the United States and the People's
+              Republic of China are prohibited from using the interface (collectively,{' '}
+              <span style={{ fontWeight: 'bold' }}>"Excluded Individual"</span>
               ).
             </li>
             <li>
               By using the Token Migration Interface, you agree to our{' '}
               <span style={{ fontWeight: 'bold', textDecoration: 'underline' }}>
-              Terms of Use and Privacy Policy
+                Terms of Use and Privacy Policy
               </span>
               , and you represent to us that you are not an Excluded Individual.
             </li>
