@@ -42,8 +42,8 @@ export const OnboardingDialog = ({ setIsOpen }: DialogProps) => {
       {...(currentOnboardingStep &&
         {
           [OnboardingSteps.ChooseWallet]: {
-            title: stringGetter({ key: STRING_KEYS.CONNECT_YOUR_WALLET }),
-            description: stringGetter({ key: STRING_KEYS.CONNECT_YOUR_WALLET_SUBTITLE }),
+            title: "Connect your wallet",
+            description: "Select your wallet from these supported options.",
             children: (
               <Styled.Content>
                 <ChooseWallet />
@@ -61,10 +61,8 @@ export const OnboardingDialog = ({ setIsOpen }: DialogProps) => {
               ),
               [EvmDerivedAccountStatus.Derived]: <Icon iconName={IconName.CheckCircle} />,
             }[derivationStatus],
-            title: stringGetter({ key: STRING_KEYS.SIGN_MESSAGE }),
-            description: stringGetter({
-              key: STRING_KEYS.SIGNATURE_CREATES_COSMOS_WALLET,
-            }),
+            title: "Sign message",
+            description: "Signatures are used to verify your ownership and to confirm wallet compatibility",
             children: (
               <Styled.Content>
                 <GenerateKeys status={derivationStatus} setStatus={setDerivationStatus} />

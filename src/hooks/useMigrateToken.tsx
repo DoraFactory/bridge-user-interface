@@ -2,7 +2,7 @@ import { useContext, createContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import BigNumber from 'bignumber.js';
 
-import { STRING_KEYS } from '@/constants/localization';
+import { STRING_KEYS, DORA_LONG_SENTENCE } from '@/constants/localization';
 
 import {
   MigrateFormSteps,
@@ -19,7 +19,7 @@ import { parseWalletError } from '@/lib/wallet';
 import { useAccountBalance } from './useAccountBalance';
 import { useAccounts } from './useAccounts';
 import { useBridgeTransaction } from './migrate/useBridgeTransaction';
-import { useIsDydxAddressValid } from './useIsDydxAddressValid';
+import { useIsDoraAddressValid } from './useIsDoraAddressValid';
 import { useMatchingEvmNetwork } from './useMatchingEvmNetwork';
 import { usePendingMigrationsData } from './usePendingMigrationsData';
 import { useStringGetter } from './useStringGetter';
@@ -40,8 +40,8 @@ export const useMigrateToken = () => useContext(MigrateTokenContext)!;
 
 const useMigrateTokenContext = () => {
   const stringGetter = useStringGetter();
-  const { evmAddress, dydxAddress } = useAccounts();
-  const { ethDYDXBalance, refetchBalances } = useAccountBalance();
+  const { evmAddress, DoraAddress } = useAccounts();
+  const { ethDORABalance, refetchBalances } = useAccountBalance();
   const { screenAddresses, restrictUser } = useRestrictions();
   const { isMatchingNetwork, matchNetwork, isSwitchingNetwork } = useMatchingEvmNetwork({
     chainId: Number(import.meta.env.VITE_ETH_CHAIN_ID),
@@ -57,12 +57,8 @@ const useMigrateTokenContext = () => {
   const [errorMsg, setErrorMsg] = useState<string | React.ReactNode[] | undefined>();
   const [amountBN, setAmountBN] = useState<BigNumber | undefined>();
   const [destinationAddress, setDestinationAddress] = useState<string | undefined>(
-    dydxAddress as string | undefined
+    DoraAddress as string | undefined
   );
-
-  useEffect(() => {
-    setDestinationAddress(dydxAddress);
-  }, [dydxAddress]);
 
   useEffect(() => {
     setAmountBN(undefined);
@@ -70,19 +66,23 @@ const useMigrateTokenContext = () => {
 
   // Validations
   const isAmountValid = Boolean(
-    MustBigNumber(ethDYDXBalance).gt(0) && amountBN?.gt(0) && amountBN?.lte(ethDYDXBalance ?? 0)
+    MustBigNumber(ethDORABalance).gt(0) && amountBN?.gt(0.1) && amountBN?.lte(ethDORABalance ?? 0)
   );
 
-  const isDestinationAddressValid = useIsDydxAddressValid(destinationAddress);
+  const isDestinationAddressValid = useIsDoraAddressValid(destinationAddress);
 
   const canWriteContracts = canAccountMigrate && isAmountValid && isDestinationAddressValid;
-
+  console.log(`在allowance中是否可以写合约？${canWriteContracts}`)
+  console.log(amountBN)
+  console.log(MigrateFormSteps.Preview)
   // Transactions
   const { needTokenAllowance, approveToken, ...tokenAllowance } = useTokenAllowance({
     amountBN,
     enabled: canWriteContracts,
     watch: currentStep === MigrateFormSteps.Preview,
   });
+
+  console.log(`needTokenAllowance is ${needTokenAllowance}`)
 
   const { clearStatus, startBridge, bridgeTxError, transactionStatus, ...bridgeTransaction } =
     useBridgeTransaction({
@@ -93,10 +93,10 @@ const useMigrateTokenContext = () => {
   const { setAddressSearchFilter, setFilter, refetchPendingMigrations } =
     usePendingMigrationsData();
 
-  useEffect(() => {
+/*   useEffect(() => {
     // Found current corresponding pending migration
     if (transactionStatus === TransactionStatus.Acknowledged) refetchPendingMigrations();
-  }, [transactionStatus]);
+  }, [transactionStatus]); */
 
   useEffect(() => {
     // Reset statuses when editing or starting new migration
@@ -110,7 +110,7 @@ const useMigrateTokenContext = () => {
   const resetForm = (shouldClearInputs?: boolean) => {
     if (shouldClearInputs) {
       setAmountBN(undefined);
-      setDestinationAddress(dydxAddress);
+      setDestinationAddress(DoraAddress);
     }
     setCurrentStep(MigrateFormSteps.Edit);
   };
@@ -132,18 +132,16 @@ const useMigrateTokenContext = () => {
 
         try {
           const screenResults = await screenAddresses({
-            addresses: [evmAddress!, dydxAddress!, destinationAddress!],
+            addresses: [evmAddress!, DoraAddress!, destinationAddress!],
             throwError: true,
           });
 
-          if (screenResults?.[evmAddress as string] || screenResults?.[dydxAddress as string]) {
+          if (screenResults?.[evmAddress as string] || screenResults?.[DoraAddress as string]) {
             restrictUser();
             return;
           } else if (screenResults?.[destinationAddress!]) {
             setErrorMsg(
-              stringGetter({
-                key: STRING_KEYS.MIGRATION_BLOCKED_MESSAGE_DESTINATION,
-              })
+              DORA_LONG_SENTENCE.MIGRATION_BLOCKED_MESSAGE_DESTINATION
             );
             return;
           }
@@ -180,7 +178,7 @@ const useMigrateTokenContext = () => {
           resetForm();
         } else if (transactionStatus === TransactionStatus.Acknowledged) {
           // Show relevant pending migrations
-          if (destinationAddress !== dydxAddress) {
+          if (destinationAddress !== DoraAddress) {
             setFilter(PendingMigrationFilter.All);
             setAddressSearchFilter(destinationAddress ?? '');
           } else {

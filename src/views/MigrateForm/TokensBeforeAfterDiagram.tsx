@@ -19,12 +19,12 @@ export const TokensBeforeAfterDiagram = () => {
   const detailItems = [
     {
       key: 'before',
-      label: stringGetter({ key: STRING_KEYS.BEFORE }),
+      label: "Before",
       value: (
         <Styled.ValueContainer>
           <Styled.TokenColumn>
             <Styled.TokenIcon>
-              <AssetIcon symbol="DYDX" />
+              <AssetIcon symbol="DORA" />
               <AssetIcon symbol="ETH" />
             </Styled.TokenIcon>
             <Styled.Output
@@ -32,14 +32,9 @@ export const TokensBeforeAfterDiagram = () => {
               type={OutputType.Asset}
               fractionDigits={TOKEN_DECIMALS}
             />
-            <Tag>ethDYDX</Tag>
+            <Tag>ethDORA</Tag>
             <span>
-              {stringGetter({
-                key: STRING_KEYS.ON_CHAIN,
-                params: {
-                  CHAIN: 'Ethereum',
-                },
-              })}
+              on Ethereum
             </span>
           </Styled.TokenColumn>
         </Styled.ValueContainer>
@@ -47,35 +42,30 @@ export const TokensBeforeAfterDiagram = () => {
     },
     {
       key: 'after',
-      label: stringGetter({ key: STRING_KEYS.AFTER }),
+      label: "After",
       value: (
         <Styled.ValueContainer>
           <Styled.TokenColumn>
             <Styled.TokenIcon>
-              <AssetIcon symbol="DYDX" />
+              <AssetIcon symbol="DORA" />
               <AssetIcon symbol="ETH" />
             </Styled.TokenIcon>
 
             <Styled.Output
-              value={amountBN}
+              value={amountBN?.negated()}
               type={OutputType.Asset}
               fractionDigits={TOKEN_DECIMALS}
               showSign={ShowSign.Both}
             />
-            <Tag>wethDYDX</Tag>
+            <Tag>ethDORA</Tag>
             <span>
-              {stringGetter({
-                key: STRING_KEYS.ON_CHAIN,
-                params: {
-                  CHAIN: 'Ethereum',
-                },
-              })}
+              on Ethereum
             </span>
           </Styled.TokenColumn>
           <Styled.TokenColumn>
             <Styled.TokenIcon>
-              <AssetIcon symbol="DYDX" />
-              <AssetIcon symbol="DYDX" />
+              <AssetIcon symbol="DORA" />
+              <AssetIcon symbol="DORA" />
             </Styled.TokenIcon>
 
             <Styled.Output
@@ -84,14 +74,9 @@ export const TokensBeforeAfterDiagram = () => {
               fractionDigits={TOKEN_DECIMALS}
               showSign={ShowSign.Both}
             />
-            <Tag>DYDX</Tag>
+            <Tag>DORA</Tag>
             <span>
-              {stringGetter({
-                key: STRING_KEYS.ON_CHAIN,
-                params: {
-                  CHAIN: 'dYdX Chain',
-                },
-              })}
+              on Dora Vota
             </span>
           </Styled.TokenColumn>
         </Styled.ValueContainer>

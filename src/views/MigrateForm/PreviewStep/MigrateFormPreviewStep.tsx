@@ -4,7 +4,7 @@ import styled, { type AnyStyledComponent } from 'styled-components';
 
 import { AlertType } from '@/constants/alerts';
 import { ButtonAction, ButtonType } from '@/constants/buttons';
-import { STRING_KEYS } from '@/constants/localization';
+import { STRING_KEYS, DORA_LONG_SENTENCE } from '@/constants/localization';
 
 import { layoutMixins } from '@/styles/layoutMixins';
 
@@ -27,6 +27,7 @@ export const MigrateFormPreviewStep = () => {
     errorMsg,
     needTokenAllowance,
     isAmountValid,
+    isDestinationAddressValid,
     isApproveTokenLoading,
     approveTokenTxError,
     isBridgePending,
@@ -40,43 +41,34 @@ export const MigrateFormPreviewStep = () => {
       <TokensBeforeAfterDiagram />
 
       <DetailsReceipt
-        header={stringGetter({ key: STRING_KEYS.ESTIMATED_TIMELINE })}
+        header="Estimated timeline"
         headerIcon={<Icon iconName={IconName.Time} />}
         detailItems={[
           {
             key: 'eth_settlement',
-            label: stringGetter({ key: STRING_KEYS.ETHEREUM_SETTLEMENT }),
+            label: 'Ethereum settlement',
             value: (
               <Tag>
-                {stringGetter({
-                  key: STRING_KEYS.X_SECONDS_LOWERCASED,
-                  params: { X: '0-12' },
-                })}
+                0-12 seconds
               </Tag>
             ),
           },
           {
             key: 'eth_finalization',
-            label: stringGetter({ key: STRING_KEYS.ETHEREUM_FINALIZATION }),
+            label: 'Ethereum finalization',
             value: (
               <Tag>
-                {stringGetter({
-                  key: STRING_KEYS.X_MINUTES_LOWERCASED,
-                  params: { X: '~20' },
-                })}
+                ~20 minutes
               </Tag>
             ),
           },
           {
             key: 'dydx_settlement',
-            label: stringGetter({ key: STRING_KEYS.DYDX_CHAIN_SETTLEMENT }),
-            tooltip: 'dydx-chain-settlement',
+            label: 'Dora Vota settlement',
+            // tooltip: 'dydx-chain-settlement',
             value: (
               <Tag>
-                {stringGetter({
-                  key: STRING_KEYS.X_HOURS_LOWERCASED,
-                  params: { X: '~40' },
-                })}
+                ~40 hours
               </Tag>
             ),
           },
@@ -95,25 +87,19 @@ export const MigrateFormPreviewStep = () => {
             checked={hasAcknowledgedDuration}
             onCheckedChange={setHasAcknowledgedDuration}
             id="acknowledge-duration"
-            label={stringGetter({
-              key: STRING_KEYS.CONFIRM_MIGRATION_DISCLAIMER_1,
-            })}
+            label={DORA_LONG_SENTENCE.CONFIRM_MIGRATION_DISCLAIMER_1}
           />
           <Checkbox
             checked={hasAcknowledgedLocked}
             onCheckedChange={setHasAcknowledgedLocked}
             id="acknowledge-locked"
-            label={stringGetter({
-              key: STRING_KEYS.CONFIRM_MIGRATION_DISCLAIMER_2,
-            })}
+            label={DORA_LONG_SENTENCE.CONFIRM_MIGRATION_DISCLAIMER_2}
           />
         </>
       )}
 
       <Styled.ButtonRow>
-        <Styled.EditButton onClick={() => resetForm(false)}>
-          {stringGetter({ key: STRING_KEYS.EDIT })}
-        </Styled.EditButton>
+        <Styled.EditButton onClick={() => resetForm(false)}>Edit</Styled.EditButton>
 
         <Styled.ConfirmButton
           action={ButtonAction.Primary}
@@ -123,12 +109,11 @@ export const MigrateFormPreviewStep = () => {
             isDisabled:
               (!needTokenAllowance && !(hasAcknowledgedDuration && hasAcknowledgedLocked)) ||
               isBridgePending ||
-              !isAmountValid,
+              !isAmountValid ||
+              !isDestinationAddressValid,
           }}
         >
-          {stringGetter({
-            key: needTokenAllowance ? STRING_KEYS.APPROVE_ALLOWANCE : STRING_KEYS.CONFIRM_MIGRATION,
-          })}
+          {needTokenAllowance ? 'Approve Allowance' : 'Confirm Migration'}
         </Styled.ConfirmButton>
       </Styled.ButtonRow>
     </>

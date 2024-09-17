@@ -43,6 +43,7 @@ export enum IconName {
   Close = 'Close',
   Copy = 'Copy',
   Discord = 'Discord',
+  Explorer = 'Dora vota Explorer',
   ExportKeys = 'ExportKeys',
   File = 'File',
   HelpCircle = 'HelpCircle',

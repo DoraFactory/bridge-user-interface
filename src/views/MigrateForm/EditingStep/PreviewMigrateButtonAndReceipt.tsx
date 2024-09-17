@@ -29,68 +29,36 @@ type ElementProps = {
 
 export const PreviewMigrateButtonAndReceipt = ({ isDisabled, isLoading }: ElementProps) => {
   const stringGetter = useStringGetter();
-  const { dydxAddress, evmAddress } = useAccounts();
+  const { DoraAddress, evmAddress } = useAccounts();
   const { amountBN, destinationAddress } = useMigrateToken();
-  const { ethDYDXBalance, DYDXBalance, wethDYDXBalance } = useAccountBalance();
+  const { ethDORABalance, DYDXBalance } = useAccountBalance();
 
   const canAccountMigrate = useSelector(calculateCanAccountMigrate);
 
   const getLabel = ({ chain, asset }: { chain: string; asset: string }) => (
     <Styled.InlineRow>
-      {stringGetter({
-        key: STRING_KEYS.BALANCE_ON_CHAIN,
-        params: { CHAIN: chain },
-      })}
+      Balance on Ethereum
       <Tag>{asset}</Tag>
     </Styled.InlineRow>
   );
 
   const migrateDetailItems = [
     {
-      key: 'ethDYDXBalance',
-      label: getLabel({ chain: 'Ethereum', asset: 'ethDYDX' }),
+      key: 'ethDORABalance',
+      label: getLabel({ chain: 'Ethereum', asset: 'ethDORA' }),
       value: (
         <DiffOutput
           type={OutputType.Asset}
-          value={ethDYDXBalance}
-          newValue={MustBigNumber(ethDYDXBalance)
+          value={ethDORABalance}
+          newValue={MustBigNumber(ethDORABalance)
             .minus(amountBN ?? 0)
             .toNumber()}
           sign={NumberSign.Negative}
-          withDiff={Boolean(ethDYDXBalance !== undefined && amountBN)}
+          withDiff={Boolean(ethDORABalance !== undefined && amountBN)}
           roundingMode={BigNumber.ROUND_DOWN}
         />
       ),
     },
-    import.meta.env.VITE_BRIDGE_CONTRACT_ADDRESS && {
-      key: 'wethDYDXBalance',
-      label: getLabel({ chain: 'Ethereum', asset: 'wethDYDX' }),
-      value: (
-        <DiffOutput
-          type={OutputType.Asset}
-          value={wethDYDXBalance}
-          newValue={amountBN?.plus(wethDYDXBalance ?? 0).toNumber() ?? 0}
-          sign={NumberSign.Positive}
-          withDiff={Boolean(wethDYDXBalance !== undefined && amountBN)}
-          roundingMode={BigNumber.ROUND_DOWN}
-        />
-      ),
-    },
-    dydxAddress &&
-      dydxAddress === destinationAddress && {
-        key: 'DYDXBalance',
-        label: getLabel({ chain: 'dYdX Chain', asset: 'DYDX' }),
-        value: (
-          <DiffOutput
-            type={OutputType.Asset}
-            value={DYDXBalance}
-            newValue={amountBN?.plus(DYDXBalance ?? 0).toNumber() ?? 0}
-            sign={NumberSign.Positive}
-            withDiff={Boolean(DYDXBalance !== undefined && amountBN)}
-            roundingMode={BigNumber.ROUND_DOWN}
-          />
-        ),
-      },
   ].filter(isTruthy);
 
   return (
@@ -103,7 +71,7 @@ export const PreviewMigrateButtonAndReceipt = ({ isDisabled, isLoading }: Elemen
           type={ButtonType.Submit}
           state={{ isLoading, isDisabled }}
         >
-          {stringGetter({ key: STRING_KEYS.PREVIEW_MIGRATION })}
+          Preview Migration
         </Button>
       )}
     </WithDetailsReceipt>

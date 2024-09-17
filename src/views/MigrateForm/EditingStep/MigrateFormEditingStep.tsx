@@ -38,8 +38,8 @@ import { PreviewMigrateButtonAndReceipt } from './PreviewMigrateButtonAndReceipt
 
 export const MigrateFormEditingStep = () => {
   const stringGetter = useStringGetter();
-  const { dydxAddress: accountDydxAddress } = useAccounts();
-  const { ethDYDXBalance } = useAccountBalance();
+  const { DoraAddress: accountDoraAddress } = useAccounts();
+  const { ethDORABalance } = useAccountBalance();
   const { isAddressSanctioned } = useRestrictions();
 
   const {
@@ -55,14 +55,14 @@ export const MigrateFormEditingStep = () => {
     DestinationAddressOptions.Account
   );
 
-  const ethDYDXBalanceBN = MustBigNumber(ethDYDXBalance);
-  const newEthDYDXBalanceBN = ethDYDXBalanceBN.minus(amountBN ?? 0);
+  const ethDORABalanceBN = MustBigNumber(ethDORABalance);
+  const newethDORABalanceBN = ethDORABalanceBN.minus(amountBN ?? 0);
 
   const onOptionChange = (option: string) => {
     if (option === DestinationAddressOptions.Other) {
       setDestinationAddress('');
-    } else if (accountDydxAddress) {
-      setDestinationAddress(accountDydxAddress);
+    } else if (accountDoraAddress) {
+      setDestinationAddress(accountDoraAddress);
     }
     setDestinationAddressOption(option as DestinationAddressOptions);
   };
@@ -81,23 +81,18 @@ export const MigrateFormEditingStep = () => {
       key: 'amount',
       label: (
         <Styled.InlineRow>
-          {stringGetter({
-            key: STRING_KEYS.AVAILABLE_ON_CHAIN,
-            params: {
-              CHAIN: 'Ethereum',
-            },
-          })}
-          <Tag>ethDYDX</Tag>
+          Available on Ethereum
+          <Tag>ethDORA</Tag>
         </Styled.InlineRow>
       ),
       value: (
         <DiffOutput
           type={OutputType.Asset}
-          value={ethDYDXBalance?.toString()}
-          newValue={newEthDYDXBalanceBN.toString()}
+          value={ethDORABalance?.toString()}
+          newValue={newethDORABalanceBN.toString()}
           sign={NumberSign.Negative}
-          hasInvalidNewValue={newEthDYDXBalanceBN.isNegative()}
-          withDiff={ethDYDXBalance !== undefined && amountBN && amountBN.gt(0)}
+          hasInvalidNewValue={newethDORABalanceBN.isNegative()}
+          withDiff={ethDORABalance !== undefined && amountBN && amountBN.gt(0)}
           roundingMode={BigNumber.ROUND_DOWN}
         />
       ),
@@ -130,7 +125,7 @@ export const MigrateFormEditingStep = () => {
       <WithDetailsReceipt side="bottom" detailItems={amountDetailItems}>
         <Styled.FormInput
           id="amount"
-          label={stringGetter({ key: STRING_KEYS.AMOUNT })}
+          label="Amount"
           type={InputType.Number}
           onChange={({ floatValue }: NumberFormatValues) => setAmountBN(MustBigNumber(floatValue))}
           value={amountBN?.toFixed(
@@ -138,113 +133,52 @@ export const MigrateFormEditingStep = () => {
             BigNumber.ROUND_DOWN
           )}
           slotRight={renderFormInputButton({
-            label: stringGetter({ key: STRING_KEYS.MAX }),
+            label: 'Max',
             isInputEmpty: !amountBN,
             onClear: () => setAmountBN(undefined),
-            onClick: () => ethDYDXBalance && setAmountBN(ethDYDXBalanceBN),
+            onClick: () => ethDORABalance && setAmountBN(ethDORABalanceBN),
           })}
+          validationConfig={
+            amountBN && !amountBN.gt(0.1) &&
+            {
+              attached: true,
+              type: AlertType.Error,
+              message: 'Please enter a quantity greater than 0.1',
+            }
+          }
         />
       </WithDetailsReceipt>
 
-      <RadioGroup
-        items={[
-          {
-            value: DestinationAddressOptions.Account,
-            label: (
-              <Styled.Label>
-                {stringGetter({
-                  key: STRING_KEYS.GENERATED_ADDRESS_VIA_ADDRESS,
-                  params: {
-                    ADDRESS_OR_WALLET_SIGNATURE: (
-                      <strong>
-                        {accountDydxAddress
-                          ? truncateAddress(accountDydxAddress)
-                          : stringGetter({ key: STRING_KEYS.WALLET_SIGNATURE })}
-                      </strong>
-                    ),
-                  },
-                })}
-              </Styled.Label>
-            ),
-            slotContent: accountDydxAddress && (
-              <Styled.InnerFormInput
-                label={
-                  <Styled.DestinationInputLabel>
-                    {stringGetter({ key: STRING_KEYS.DYDX_CHAIN_ADDRESS })}
-                    <Icon iconName={IconName.Check} />
-                  </Styled.DestinationInputLabel>
-                }
-                type={InputType.Text}
-                value={truncateAddress(accountDydxAddress)}
-                validationConfig={{
-                  attached: true,
-                  type: AlertType.Info,
-                  message: stringGetter({
-                    key: STRING_KEYS.GENERATED_ADDRESS_INFO,
-                    params: {
-                      TRADE_URL: import.meta.env.VITE_TRADE_URL || 'the trading app',
-                    },
-                  }),
-                }}
-                disabled
-              />
-            ),
-          },
-          {
-            value: DestinationAddressOptions.Other,
-            label: (
-              <Styled.Label>
-                {stringGetter({
-                  key: STRING_KEYS.SEND_TO_ANOTHER_ADDRESS,
-                  params: {
-                    ADDRESS: (
-                      <strong>{stringGetter({ key: STRING_KEYS.DYDX_CHAIN_ADDRESS })}</strong>
-                    ),
-                  },
-                })}
-              </Styled.Label>
-            ),
-            slotContent: (
-              <Styled.AdressInputContainer>
-                <Styled.InnerFormInput
-                  id="destination"
-                  onInput={(e: SyntheticInputEvent) => setDestinationAddress(e.target?.value)}
-                  label={
-                    <Styled.DestinationInputLabel>
-                      {stringGetter({ key: STRING_KEYS.DYDX_CHAIN_ADDRESS })}
-                      {isDestinationAddressValid && <Icon iconName={IconName.Check} />}
-                    </Styled.DestinationInputLabel>
-                  }
-                  type={InputType.Text}
-                  value={destinationAddress}
-                  placeholder={stringGetter({ key: STRING_KEYS.ENTER_ADDRESS })}
-                  slotRight={renderFormInputButton({
-                    label: stringGetter({ key: STRING_KEYS.PASTE }),
-                    isInputEmpty: !destinationAddress,
-                    onClear: () => setDestinationAddress(''),
-                    onClick: onPasteAddress,
-                  })}
-                  validationConfig={
-                    destinationAddress &&
-                    !isDestinationAddressValid && {
-                      attached: true,
-                      type: AlertType.Error,
-                      message: stringGetter({
-                        key: isAddressSanctioned(destinationAddress)
-                          ? STRING_KEYS.MIGRATION_BLOCKED_MESSAGE_DESTINATION
-                          : STRING_KEYS.INVALID_ADDRESS_BODY,
-                      }),
-                    }
-                  }
-                />
-              </Styled.AdressInputContainer>
-            ),
-          },
-        ]}
-        value={destinationAddressOption}
-        onValueChange={onOptionChange}
-      />
-
+      <Styled.Label>Send to your Dora Vota Address</Styled.Label>
+      <Styled.AdressInputContainer>
+        <Styled.InnerFormInput
+          id="destination"
+          onInput={(e: SyntheticInputEvent) => setDestinationAddress(e.target?.value)}
+          label={
+            <Styled.DestinationInputLabel>
+              Dora Vota Address
+              {isDestinationAddressValid && <Icon iconName={IconName.Check} />}
+            </Styled.DestinationInputLabel>
+          }
+          type={InputType.Text}
+          value={destinationAddress}
+          placeholder={'Enter Dora Vota address'}
+          slotRight={renderFormInputButton({
+            label: "Paste",
+            isInputEmpty: !destinationAddress,
+            onClear: () => setDestinationAddress(''),
+            onClick: onPasteAddress,
+          })}
+          validationConfig={
+            destinationAddress &&
+            !isDestinationAddressValid && {
+              attached: true,
+              type: AlertType.Error,
+              message: 'Please enter a valid DORA Vota address.',
+            }
+          }
+        />
+      </Styled.AdressInputContainer>
       <Styled.Footer>
         <PreviewMigrateButtonAndReceipt isDisabled={!isAmountValid || !isDestinationAddressValid} />
       </Styled.Footer>

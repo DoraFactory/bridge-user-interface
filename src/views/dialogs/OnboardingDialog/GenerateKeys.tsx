@@ -8,7 +8,7 @@ import { AlertType } from '@/constants/alerts';
 import { ButtonAction } from '@/constants/buttons';
 import { STRING_KEYS } from '@/constants/localization';
 
-import { DydxAddress, SIGN_TYPED_DATA } from '@/constants/wallets';
+import { DoraAddress, SIGN_TYPED_DATA } from '@/constants/wallets';
 
 import { useAccounts, useDydxClient, useStringGetter, useMatchingEvmNetwork } from '@/hooks';
 
@@ -92,37 +92,6 @@ export const GenerateKeys = ({
       setStatus(EvmDerivedAccountStatus.Deriving);
 
       const signature = await signTypedDataAsync();
-      const { wallet: dydxWallet } = await getWalletFromEvmSignature({
-        signature,
-      });
-
-      // 2. Ensure signature is deterministic
-      // Check if subaccounts exist
-      const dydxAddress = dydxWallet.address as DydxAddress;
-
-      try {
-        const subaccounts = await getSubaccounts({ dydxAddress });
-
-        if (!subaccounts.length) {
-          setStatus(EvmDerivedAccountStatus.EnsuringDeterminism);
-          const additionalSignature = await signTypedDataAsync();
-          if (signature !== additionalSignature) {
-            setStatus(EvmDerivedAccountStatus.NotDerived);
-            setError(
-              stringGetter({
-                key: STRING_KEYS.INDETERMINISTIC_SIGNING,
-              }) as string
-            );
-            return;
-          }
-        }
-      } catch (error) {
-        setStatus(EvmDerivedAccountStatus.NotDerived);
-        const { message } = parseWalletError({ error, stringGetter });
-        if (message) setError(message);
-        return;
-      }
-
       await setWalletFromEvmSignature(signature);
 
       // 3: Remember me (encrypt and store signature)
@@ -132,7 +101,7 @@ export const GenerateKeys = ({
         saveEvmSignature(encryptedSignature);
       }
 
-      // 4. Done
+      // 2. Done
       setStatus(EvmDerivedAccountStatus.Derived);
     } catch (error) {
       setStatus(EvmDerivedAccountStatus.NotDerived);
@@ -140,7 +109,7 @@ export const GenerateKeys = ({
         error,
         stringGetter,
       });
-
+      console.log(`find error, error is ${error}`);
       if (message) setError(message);
     }
   };
@@ -150,20 +119,9 @@ export const GenerateKeys = ({
       <Styled.StatusCardsContainer>
         {[
           {
-            status: EvmDerivedAccountStatus.Deriving,
-            title: stringGetter({ key: STRING_KEYS.GENERATE_DYDX_WALLET }),
-            description: stringGetter({
-              key: STRING_KEYS.VERIFY_WALLET_OWNERSHIP,
-            }),
-          },
-          status === EvmDerivedAccountStatus.EnsuringDeterminism && {
             status: EvmDerivedAccountStatus.EnsuringDeterminism,
-            title: stringGetter({
-              key: STRING_KEYS.VERIFY_WALLET_COMPATIBILITY,
-            }),
-            description: stringGetter({
-              key: STRING_KEYS.ENSURES_WALLET_SUPPORT,
-            }),
+            title: 'Verify wallet compatibility',
+            description: 'Ensures your wallet is supported.',
           },
         ]
           .filter(isTruthy)
@@ -188,7 +146,7 @@ export const GenerateKeys = ({
         {staticEncryptionKey && (
           <Styled.RememberMe htmlFor="remember-me">
             <WithTooltip tooltip="remember-me" withIcon>
-              {stringGetter({ key: STRING_KEYS.REMEMBER_ME })}
+              Remember me
             </WithTooltip>
             <Switch
               name="remember-me"
@@ -203,18 +161,9 @@ export const GenerateKeys = ({
           slotReceipt={
             <Styled.ReceiptArea>
               <span>
-                {stringGetter({
-                  key: STRING_KEYS.FREE_SIGNING,
-                  params: {
-                    FREE: (
-                      <Styled.Green>
-                        {stringGetter({
-                          key: STRING_KEYS.FREE_TRADING_TITLE_ASTERISK_FREE,
-                        })}
-                      </Styled.Green>
-                    ),
-                  },
-                })}
+                Signing is {''}
+                <Styled.Green>free</Styled.Green>
+                {''} and will not send a transaction.
               </span>
             </Styled.ReceiptArea>
           }
@@ -225,7 +174,7 @@ export const GenerateKeys = ({
               onClick={() => switchNetwork().then(deriveKeys).then(onKeysDerived)}
               state={{ isLoading: isSwitchingNetwork }}
             >
-              {stringGetter({ key: STRING_KEYS.SWITCH_NETWORK })}
+              Switch network
             </Button>
           ) : (
             <Button
@@ -236,19 +185,11 @@ export const GenerateKeys = ({
                 isDisabled: status !== EvmDerivedAccountStatus.NotDerived,
               }}
             >
-              {!error
-                ? stringGetter({
-                    key: STRING_KEYS.SEND_REQUEST,
-                  })
-                : stringGetter({
-                    key: STRING_KEYS.TRY_AGAIN,
-                  })}
+              {!error ? 'Send request' : 'Try again'}
             </Button>
           )}
         </Styled.WithReceipt>
-        <Styled.Disclaimer>
-          {stringGetter({ key: STRING_KEYS.CHECK_WALLET_FOR_REQUEST })}
-        </Styled.Disclaimer>
+        <Styled.Disclaimer>Check your wallet for a request!</Styled.Disclaimer>
       </Styled.Footer>
     </>
   );

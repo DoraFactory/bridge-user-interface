@@ -3,7 +3,7 @@ import BigNumber from 'bignumber.js';
 
 import { ButtonAction, ButtonType } from '@/constants/buttons';
 import { TransactionStatus } from '@/constants/migrate';
-import { STRING_KEYS } from '@/constants/localization';
+import { STRING_KEYS, DORA_KEYS } from '@/constants/localization';
 
 import { layoutMixins } from '@/styles/layoutMixins';
 
@@ -39,18 +39,12 @@ export const MigrateFormConfirmedStep = () => {
 
   const { evmAddress } = useAccounts();
 
-  const getAssetOnChainLabel = ({ asset, chain }: { asset: string; chain: string }) => (
-    <span>
-      {asset} {stringGetter({ key: STRING_KEYS.ON_CHAIN, params: { CHAIN: chain } })}
-    </span>
-  );
-
   return (
     <>
       <TokensBeforeAfterDiagram />
 
       <DetailsReceipt
-        header={stringGetter({ key: STRING_KEYS.ETHEREUM_SETTLEMENT })}
+        header="Ethereum settlement"
         headerIcon={<AssetIcon symbol="ETH" />}
         detailItems={[
           {
@@ -60,11 +54,11 @@ export const MigrateFormConfirmedStep = () => {
                 {transactionStatus > TransactionStatus.NotStarted &&
                   transactionStatus < TransactionStatus.Finalized &&
                   !bridgeTxError && <Ring withAnimation value={0.25} />}
-                {stringGetter({ key: STRING_KEYS.TRANSACTION })}
+                Transaction
                 {transactionStatus >= TransactionStatus.Finalized ? (
-                  <Tag sign={TagSign.Positive}>{stringGetter({ key: STRING_KEYS.FINALIZED })}</Tag>
+                  <Tag sign={TagSign.Positive}>Finalized</Tag>
                 ) : bridgeTxError ? (
-                  <Tag sign={TagSign.Negative}>{stringGetter({ key: STRING_KEYS.FAILED })}</Tag>
+                  <Tag sign={TagSign.Negative}>Failed</Tag>
                 ) : (
                   transactionStatus === TransactionStatus.Unfinalized && (
                     <FinalizingCountdownTimer numBlocksTillFinalized={numBlocksTillFinalized} />
@@ -74,13 +68,13 @@ export const MigrateFormConfirmedStep = () => {
             ),
             value: (
               <Link href={`${import.meta.env.VITE_ETHERSCAN_URL}/tx/${bridgeTxHash}`} withIcon>
-                {stringGetter({ key: STRING_KEYS.BLOCK_EXPLORER })}
+                Block explorer
               </Link>
             ),
           },
           {
             key: 'address',
-            label: stringGetter({ key: STRING_KEYS.ADDRESS }),
+            label: "Address",
             value: (
               <CopyButton buttonType="text" value={evmAddress}>
                 {truncateAddress(evmAddress, '0x')}
@@ -88,26 +82,8 @@ export const MigrateFormConfirmedStep = () => {
             ),
           },
           {
-            key: 'wethDYDX',
-            label: getAssetOnChainLabel({
-              asset: 'wethDYDX',
-              chain: 'Ethereum',
-            }),
-            value: (
-              <Styled.Output
-                type={OutputType.Asset}
-                showSign={ShowSign.Both}
-                value={amountBN}
-                roundingMode={BigNumber.ROUND_DOWN}
-              />
-            ),
-          },
-          {
             key: 'ethDYDX',
-            label: getAssetOnChainLabel({
-              asset: 'ethDYDX',
-              chain: 'Ethereum',
-            }),
+            label: 'ethDORA on Ethereum',
             value: (
               <Styled.Output
                 type={OutputType.Asset}
@@ -122,8 +98,8 @@ export const MigrateFormConfirmedStep = () => {
       />
 
       <DetailsReceipt
-        header={stringGetter({ key: STRING_KEYS.DYDX_CHAIN_SETTLEMENT })}
-        headerIcon={<AssetIcon symbol="DYDX" />}
+        header={DORA_KEYS.DORA_CHAIN_SETTLEMENT}
+        headerIcon={<AssetIcon symbol="DORA" />}
         detailItems={[
           {
             key: 'transaction',
@@ -132,27 +108,21 @@ export const MigrateFormConfirmedStep = () => {
                 {transactionStatus === TransactionStatus.Finalized && (
                   <Ring withAnimation value={0.25} />
                 )}
-                {stringGetter({ key: STRING_KEYS.TRANSACTION })}
+                Transaction
                 <Styled.StartedTag
                   hasStarted={transactionStatus === TransactionStatus.Acknowledged}
                 >
-                  {stringGetter({
-                    key:
-                      transactionStatus < TransactionStatus.Acknowledged
-                        ? STRING_KEYS.NOT_STARTED
-                        : STRING_KEYS.STARTED,
-                  })}
+                  {transactionStatus < TransactionStatus.Acknowledged
+                        ? "Not Started"
+                        : "Started"}
                 </Styled.StartedTag>
               </Styled.InlineRow>
             ),
-            value: stringGetter({
-              key: STRING_KEYS.X_HOURS_LOWERCASED,
-              params: { X: '~40' },
-            }),
+            value: "~40 hours",
           },
           {
             key: 'address',
-            label: stringGetter({ key: STRING_KEYS.ADDRESS }),
+            label: "Address",
             value: (
               <CopyButton buttonType="text" value={destinationAddress}>
                 {truncateAddress(destinationAddress)}
@@ -161,10 +131,7 @@ export const MigrateFormConfirmedStep = () => {
           },
           {
             key: 'DYDX',
-            label: getAssetOnChainLabel({
-              asset: 'DYDX',
-              chain: 'dYdX Chain',
-            }),
+            label: 'DORA on Dora Vota',
             value: (
               <Styled.Output
                 type={OutputType.Asset}
@@ -180,13 +147,13 @@ export const MigrateFormConfirmedStep = () => {
       {bridgeTxError ? (
         <Styled.ButtonRow>
           <Styled.SubmitButton action={ButtonAction.Primary} type={ButtonType.Submit}>
-            {stringGetter({ key: STRING_KEYS.RETRY_MIGRATION })}
+            Retry migration
           </Styled.SubmitButton>
         </Styled.ButtonRow>
       ) : transactionStatus < TransactionStatus.Acknowledged ? (
         <Styled.FooterNote>
           {transactionStatus < TransactionStatus.Finalized ? (
-            stringGetter({ key: STRING_KEYS.PROGRESS_TRACKING_WARNING })
+            "Leave this open to track your progress while the transaction is being finalized."
           ) : (
             <LoadingDots size={3} />
           )}
@@ -194,10 +161,10 @@ export const MigrateFormConfirmedStep = () => {
       ) : (
         <Styled.ButtonRow>
           <Styled.ResetButton onClick={() => resetForm(true)}>
-            {stringGetter({ key: STRING_KEYS.NEW_MIGRATION })}
+            New migration
           </Styled.ResetButton>
           <Styled.SubmitButton action={ButtonAction.Primary} type={ButtonType.Submit}>
-            {stringGetter({ key: STRING_KEYS.CHECK_STATUS })}
+            Check status
           </Styled.SubmitButton>
         </Styled.ButtonRow>
       )}

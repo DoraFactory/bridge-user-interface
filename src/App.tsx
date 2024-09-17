@@ -62,15 +62,13 @@ const Content = () => {
                 items={[
                   {
                     value: MigrateTabs.Migrate,
-                    label: stringGetter({ key: STRING_KEYS.MIGRATE }),
+                    label: "Migrate",
                     forceMount: true,
                     content: <MigratePage />,
                   },
                   {
                     value: MigrateTabs.PendingMigrations,
-                    label: stringGetter({
-                      key: STRING_KEYS.PENDING_MIGRATIONS,
-                    }),
+                    label: 'Pending Migrations',
                     forceMount: true,
                     content: <PendingMigrationsPage />,
                   },

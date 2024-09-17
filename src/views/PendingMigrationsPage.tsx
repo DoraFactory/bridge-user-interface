@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled, { AnyStyledComponent } from 'styled-components';
 import { CaretDownIcon } from '@radix-ui/react-icons';
 
-import { STRING_KEYS } from '@/constants/localization';
+import { STRING_KEYS, DORA_LONG_SENTENCE } from '@/constants/localization';
 
 import { layoutMixins } from '@/styles/layoutMixins';
 import breakpoints from '@/styles/breakpoints';
@@ -21,20 +21,15 @@ export const PendingMigrationsPage = () => {
     <Styled.Container>
       <Styled.Description>
         <p>
-          {stringGetter({ key: STRING_KEYS.PENDING_MIGRATIONS_DESCRIPTION_I })}
-          {!showFullDescription && '..'}
+        {DORA_LONG_SENTENCE.PENDING_MIGRATIONS_DESCRIPTION_I}
         </p>
         {showFullDescription && (
           <>
             <p>
-              {stringGetter({
-                key: STRING_KEYS.PENDING_MIGRATIONS_DESCRIPTION_II,
-              })}
+            {DORA_LONG_SENTENCE.PENDING_MIGRATIONS_DESCRIPTION_II}
             </p>
             <p>
-              {stringGetter({
-                key: STRING_KEYS.PENDING_MIGRATIONS_DESCRIPTION_III,
-              })}
+            {DORA_LONG_SENTENCE.PENDING_MIGRATIONS_DESCRIPTION_III}
             </p>
           </>
         )}
@@ -42,9 +37,7 @@ export const PendingMigrationsPage = () => {
           onPressedChange={setShowFullDescription}
           slotRight={<CaretDownIcon />}
         >
-          {stringGetter({
-            key: showFullDescription ? STRING_KEYS.VIEW_LESS : STRING_KEYS.VIEW_MORE,
-          })}
+          {showFullDescription ? "View Less" : "View More"}
         </Styled.ViewMoreToggle>
       </Styled.Description>
       <PendingMigrationsTable />

@@ -92,7 +92,7 @@ export const WALLET_CONNECT_EXPLORER_RECOMMENDED_IDS = Object.values(
 export const wallets: Record<WalletType, WalletConfig> = {
   [WalletType.OtherWallet]: {
     type: WalletType.OtherWallet,
-    stringKey: STRING_KEYS.OTHER_WALLET,
+    stringKey: "Other",
     icon: GenericWalletIcon,
     connectionTypes: [WalletConnectionType.InjectedEip1193, WalletConnectionType.WalletConnect2],
     matchesInjectedEip1193: (provider) =>
@@ -105,14 +105,14 @@ export const wallets: Record<WalletType, WalletConfig> = {
   },
   [WalletType.CoinbaseWallet]: {
     type: WalletType.CoinbaseWallet,
-    stringKey: STRING_KEYS.COINBASE_WALLET,
+    stringKey: "Coinbase Wallet",
     icon: CoinbaseIcon,
     connectionTypes: [WalletConnectionType.CoinbaseWalletSdk, WalletConnectionType.InjectedEip1193],
     matchesInjectedEip1193: (provider) => provider.isCoinbaseWallet,
   },
   [WalletType.MetaMask]: {
     type: WalletType.MetaMask,
-    stringKey: STRING_KEYS.METAMASK,
+    stringKey: "MetaMask",
     icon: MetaMaskIcon,
     connectionTypes: [WalletConnectionType.InjectedEip1193, WalletConnectionType.WalletConnect2],
     matchesInjectedEip1193: isMetaMask,
@@ -120,7 +120,7 @@ export const wallets: Record<WalletType, WalletConfig> = {
   },
   [WalletType.WalletConnect2]: {
     type: WalletType.WalletConnect2,
-    stringKey: STRING_KEYS.WALLET_CONNECT_2,
+    stringKey: "WalletConnect",
     icon: WalletConnectIcon,
     connectionTypes: [WalletConnectionType.WalletConnect2],
   },
@@ -165,19 +165,19 @@ export const COSMOS_DERIVATION_PATH = "m/44'/118'/0'/0/0";
  * @description typed data to sign for dYdX Chain onboarding
  */
 export const SIGN_TYPED_DATA = {
-  primaryType: 'dYdX',
+  primaryType: 'dYdx',
   domain: {
-    name: 'dYdX Chain',
+    name: 'Dora Vota',
   },
   types: {
-    dYdX: [{ name: 'action', type: 'string' }],
+    dYdx: [{ name: 'action', type: 'string' }],
   },
   message: {
-    action: 'dYdX Chain Onboarding',
+    action: 'DORA Token Migration Onboarding',
   },
 } as const;
 
 export type PrivateInformation = ReturnType<typeof onboarding.deriveHDKeyFromEthereumSignature>;
 
 export type EthereumAddress = `0x${string}`;
-export type DydxAddress = `dydx${string}`;
+export type DoraAddress = `dora${string}`;
