@@ -37,6 +37,8 @@ jobs:
           docker tag vota-bridge-ui:local $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       - name: Redeploy on aws
+        env:
+          SUFFIX: ${{ fromJson('["vota-bridge-ui-dev", "vota-migration-ui-prod  -n webapp"]')[github.ref_name == 'main'] }}
         run: |
           aws eks update-kubeconfig --region  ap-southeast-1 --name ${{ secrets.EKS_CLUSTER }}
-          kubectl rollout restart deploy vota-bridge-ui-dev
+          kubectl rollout restart deploy $SUFFIX
