@@ -2,7 +2,7 @@ name: Vota bridge CICD
 
 on:
   push:
-    branches: [dora-migrate-vota]
+    branches: [dora-migrate-vota,main]
 
 jobs:
   build:
@@ -19,7 +19,7 @@ jobs:
         run: |
           docker build -t vota-bridge-ui:local -f Dockerfile .
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@master
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_ROLE }}
           aws-region: ap-southeast-1
