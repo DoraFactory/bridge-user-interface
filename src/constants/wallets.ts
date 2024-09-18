@@ -9,9 +9,7 @@ import { isMetaMask } from '@/lib/wallet/providers';
 // Wallet connection types
 
 export enum WalletConnectionType {
-  CoinbaseWalletSdk = 'coinbaseWalletSdk',
   InjectedEip1193 = 'injectedEip1193',
-  WalletConnect2 = 'walletConnect2',
 }
 
 export enum WalletErrorType {
@@ -32,33 +30,21 @@ type WalletConnectionTypeConfig = {
 };
 
 export const walletConnectionTypes: Record<WalletConnectionType, WalletConnectionTypeConfig> = {
-  [WalletConnectionType.CoinbaseWalletSdk]: {
-    name: 'Coinbase Wallet SDK',
-    wagmiConnectorId: 'coinbaseWallet',
-  },
   [WalletConnectionType.InjectedEip1193]: {
     name: 'injected EIP-1193 provider',
     wagmiConnectorId: 'injected',
-  },
-  [WalletConnectionType.WalletConnect2]: {
-    name: 'WalletConnect 2.0',
-    wagmiConnectorId: 'walletConnect',
   },
 };
 
 // Wallets
 
 export enum WalletType {
-  CoinbaseWallet = 'COINBASE_WALLET',
   MetaMask = 'METAMASK',
-  WalletConnect2 = 'WALLETCONNECT_2',
   OtherWallet = 'OTHER_WALLET',
 }
 
 export const DISPLAYED_WALLETS: WalletType[] = [
   WalletType.MetaMask,
-  WalletType.WalletConnect2,
-  WalletType.CoinbaseWallet,
   WalletType.OtherWallet,
 ];
 
@@ -94,7 +80,7 @@ export const wallets: Record<WalletType, WalletConfig> = {
     type: WalletType.OtherWallet,
     stringKey: "Other",
     icon: GenericWalletIcon,
-    connectionTypes: [WalletConnectionType.InjectedEip1193, WalletConnectionType.WalletConnect2],
+    connectionTypes: [WalletConnectionType.InjectedEip1193],
     matchesInjectedEip1193: (provider) =>
       Object.entries(wallets).every(
         ([walletType, walletConfig]) =>
@@ -103,26 +89,13 @@ export const wallets: Record<WalletType, WalletConfig> = {
           !walletConfig.matchesInjectedEip1193(provider)
       ),
   },
-  [WalletType.CoinbaseWallet]: {
-    type: WalletType.CoinbaseWallet,
-    stringKey: "Coinbase Wallet",
-    icon: CoinbaseIcon,
-    connectionTypes: [WalletConnectionType.CoinbaseWalletSdk, WalletConnectionType.InjectedEip1193],
-    matchesInjectedEip1193: (provider) => provider.isCoinbaseWallet,
-  },
   [WalletType.MetaMask]: {
     type: WalletType.MetaMask,
     stringKey: "MetaMask",
     icon: MetaMaskIcon,
-    connectionTypes: [WalletConnectionType.InjectedEip1193, WalletConnectionType.WalletConnect2],
+    connectionTypes: [WalletConnectionType.InjectedEip1193],
     matchesInjectedEip1193: isMetaMask,
     walletconnect2Id: WALLET_CONNECT_EXPLORER_RECOMMENDED_WALLETS.Metamask,
-  },
-  [WalletType.WalletConnect2]: {
-    type: WalletType.WalletConnect2,
-    stringKey: "WalletConnect",
-    icon: WalletConnectIcon,
-    connectionTypes: [WalletConnectionType.WalletConnect2],
   },
 };
 
@@ -155,22 +128,22 @@ export type WalletConnection = {
   provider?: ExternalProvider;
 };
 
-// dYdX Chain wallets
+// Chain wallets
 
 import { type onboarding } from '@dydxprotocol/v4-client-js';
 
 export const COSMOS_DERIVATION_PATH = "m/44'/118'/0'/0/0";
 
 /**
- * @description typed data to sign for dYdX Chain onboarding
+ * @description typed data to sign for Dora Vota Chain onboarding
  */
 export const SIGN_TYPED_DATA = {
-  primaryType: 'dYdx',
+  primaryType: 'DORA',
   domain: {
     name: 'Dora Vota',
   },
   types: {
-    dYdx: [{ name: 'action', type: 'string' }],
+    DORA: [{ name: 'action', type: 'string' }],
   },
   message: {
     action: 'DORA Token Migration Onboarding',

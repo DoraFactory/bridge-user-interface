@@ -1,14 +1,14 @@
 export enum LocalStorageKey {
   // Onboarding / Accounts
-  EvmAddress = 'dydx.migrate.EvmAddress',
-  DoraAddress = 'dydx.migrate.DoraAddress',
-  OnboardingSelectedWalletType = 'dydx.migrate.OnboardingSelectedWalletType',
-  WalletConnectionType = 'dydx.migrate.WalletConnectionType',
-  OnboardingHasAcknowledgedTerms = 'dydx.migrate.OnboardingHasAcknowledgedTerms',
-  EvmDerivedAddresses = 'dydx.migrate.EvmDerivedAddresses',
+  EvmAddress = 'dora.migrate.EvmAddress',
+  DoraAddress = 'dora.migrate.DoraAddress',
+  OnboardingSelectedWalletType = 'dora.migrate.OnboardingSelectedWalletType',
+  WalletConnectionType = 'dora.migrate.WalletConnectionType',
+  OnboardingHasAcknowledgedTerms = 'dora.migrate.OnboardingHasAcknowledgedTerms',
+  EvmDerivedAddresses = 'dora.migrate.EvmDerivedAddresses',
 
   // UI State
-  SelectedLocale = 'dydx.migrate.SelectedLocale',
+  SelectedLocale = 'dora.migrate.SelectedLocale',
 }
 
 export const LOCAL_STORAGE_VERSIONS = {

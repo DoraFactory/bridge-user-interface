@@ -15,8 +15,6 @@ import { Button } from '@/components/Button';
 import { Icon } from '@/components/Icon';
 import { Link } from '@/components/Link';
 
-const aboutWalletsLink = `https://www.dydx.academy/video/defi-wallet`;
-
 export const ChooseWallet = () => {
   const stringGetter = useStringGetter();
 
@@ -48,12 +46,6 @@ export const ChooseWallet = () => {
           </Styled.WalletButton>
         ))}
       </Styled.Wallets>
-
-      <Styled.Footer>
-        <Link href={aboutWalletsLink} withIcon>
-          About wallets
-        </Link>
-      </Styled.Footer>
     </>
   );
 };
