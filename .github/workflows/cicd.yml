@@ -13,6 +13,9 @@ jobs:
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v4
+      - name: Create .env file from secret
+        run: |
+          echo "${{ secrets.ENV_CONTENTS }}" > .env
       - name: Build image
         env:
           BUILD_ARG: ${{ github.ref_name }}
