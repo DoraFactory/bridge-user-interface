@@ -30,7 +30,7 @@ const useAccountBalanceContext = () => {
   const { evmAddress, DoraAddress, getAccountBalance } = useAccounts();
   const canAccountMigrate = useSelector(calculateCanAccountMigrate);
 
-  console.log(`ETH dydx contract address is ${import.meta.env.VITE_ETH_DORA_ADDRESSS}`)
+  console.log(`ETH dora contract address is ${import.meta.env.VITE_ETH_DORA_ADDRESSS}`)
   console.log(`query evmAddress is ${evmAddress}`)
   console.log(`是否可以进行账户迁移${canAccountMigrate}`)
   console.log(`chain id is ${Number(import.meta.env.VITE_ETH_CHAIN_ID)}`)
