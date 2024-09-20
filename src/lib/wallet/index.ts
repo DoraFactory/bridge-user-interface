@@ -52,24 +52,6 @@ export const getWalletConnection = ({
 
         break;
       }
-
-      case WalletConnectionType.WalletConnect2: {
-        return {
-          type: WalletConnectionType.WalletConnect2,
-        };
-      }
-
-      case WalletConnectionType.CoinbaseWalletSdk: {
-        return {
-          type: WalletConnectionType.CoinbaseWalletSdk,
-        };
-      }
-
-      case WalletConnectionType.CosmosSigner: {
-        return {
-          type: WalletConnectionType.CosmosSigner,
-        };
-      }
     }
   }
 };

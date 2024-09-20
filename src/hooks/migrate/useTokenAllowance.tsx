@@ -3,7 +3,6 @@ import BigNumber from 'bignumber.js';
 
 import { useContractWrite, useContractRead, useWaitForTransaction } from 'wagmi';
 
-import { ethDYDXContractAbi } from '@/constants/abi';
 import { ethINFContractAbi } from '@/constants/abi';
 import { TOKEN_DECIMAL_SHIFT } from '@/constants/migrate';
 
