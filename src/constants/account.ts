@@ -2,7 +2,7 @@
  * OnboardingSteps
  * 1. Choose wallet
  * 2. Key derivation
- *  a. If wallet has no dYdX Chain transactions and not on whitelist, sign twice (future)
+ *  a. If wallet has no Vota Chain transactions and not on whitelist, sign twice (future)
  *   i. Success
  *   ii. Signatures don't match error (Wallet is non-deterministic)
  *  b. Success

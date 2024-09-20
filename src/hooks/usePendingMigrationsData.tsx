@@ -123,7 +123,7 @@ export const usePendingMigrationsData = ({
     enabled: filter === PendingMigrationFilter.Mine && Boolean(evmAddress),
   });
 
-  console.log(evmUserRecords);
+  console.log(`当前用户的Record记录为${evmUserRecords}`);
 
   useEffect(() => {
     if (error) {
@@ -147,7 +147,7 @@ export const usePendingMigrationsData = ({
 
     console.log(`transformedEVMUserRecords is ${transformedEVMUserRecords}`);
 
-    if (filter === PendingMigrationFilter.Mine && evmAddress && transformedUserRecords.length) {
+    if (filter === PendingMigrationFilter.Mine && evmAddress) {
       setFilteredPendingMigrations(transformedEVMUserRecords);
     } else {
       const searchFilter = addressSearchFilter.trim().toLowerCase();

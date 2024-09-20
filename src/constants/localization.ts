@@ -53,12 +53,7 @@ export const DORA_LONG_SENTENCE = {
   "MIGRATION_FAQ_VCDORA_HOLDER_ANSWER": "vcDORA credits on the vcDORA Ethereum smart contract will still be valid until all DORA tokens staked in the vcDORA smart contract exit. Once you can withdraw your ethDORA from the vcDORA smart contract, you can immediately engage with the migration portal. If you still cannot withdraw from the vcDORA smart contract, please don’t worry as the vcDORA contract will remain and be maintained on Eththeum.",
   "MIGRATION_FAQ_HOW_TO_TRACK_ANSWER": "Please use https://vota-migration.dorafactory.org/ to track migration status.",
   "MIGRATION_FAQ_HOW_TO_TRACK": "How can I track the migration status?",
-  "MIGRATION_FAQ_WHAT_ADDRESS_ANSWER": "Users who interact with the portal can send dYdX Chain DYDX tokens to any dYdX Chain address. User’s can send tokens directly to their dYdX Chain address that is automatically created from their Ethereum address’s signature.",
-  "MIGRATION_FAQ_WHAT_ADDRESS": "What address can I send dYdX Chain DYDX to?",
-  "MIGRATION_FAQ_WHAT_TOKENS_ANSWER": "Holders who successfully engage with the portal will receive wethDYDX on Ethereum and DYDX on dYdX Chain.",
   "MIGRATION_FAQ_WHAT_TOKENS": "What tokens will I receive?",
-  "MIGRATION_FAQ_WRAPPED_TOKENS_ANSWER": "wethDYDX are minted 1:1 to any users who successfully send Ethereum-based DYDX to the smart contract. wethDYDX have the same v3 governance rights as Ethereum-based DYDX, and are transferable. wethDYDX cannot be bridged to v4.",
-  "MIGRATION_FAQ_WRAPPED_TOKENS": "What are wrapped Ethereum DYDX tokens (“wethDYDX”)?",
   "MIGRATION_BLOCKED_MESSAGE_DESTINATION": "Because the destination address appears to be a resident of, or using this user interface from, a jurisdiction that violates our terms of use, or has engaged in activity that violates our terms of use, the destination address has been blocked and this transaction cannot be completed.",
 }
 

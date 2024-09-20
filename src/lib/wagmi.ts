@@ -38,27 +38,6 @@ const injectedConnectorOptions = {
   },
 };
 
-const walletconnect2ConnectorOptions: ConstructorParameters<typeof WalletConnectConnector>[0] = {
-  chains,
-  options: {
-    projectId: import.meta.env.VITE_WALLETCONNECT2_PROJECT_ID,
-    metadata: {
-      name: 'dYdX',
-      description: '',
-      url: import.meta.env.VITE_BASE_URL,
-      icons: [`${import.meta.env.VITE_BASE_URL}/cbw-image.png}`],
-    },
-    showQrModal: true,
-    qrModalOptions: {
-      themeMode: 'dark' as const,
-      themeVariables: {
-        '--wcm-accent-color': '#5973fe',
-        '--wcm-font-family': 'var(--fontFamily-base)',
-      },
-      explorerRecommendedWalletIds: WALLET_CONNECT_EXPLORER_RECOMMENDED_IDS,
-    },
-  },
-};
 
 const connectors = [
   new MetaMaskConnector({
@@ -67,14 +46,6 @@ const connectors = [
       shimDisconnect: true,
     },
   }),
-  new CoinbaseWalletConnector({
-    chains,
-    options: {
-      appName: 'dYdX',
-      reloadOnDisconnect: false,
-    },
-  }),
-  new WalletConnectConnector(walletconnect2ConnectorOptions),
   new InjectedConnector(injectedConnectorOptions),
 ];
 
@@ -96,18 +67,6 @@ const createInjectedConnectorWithProvider = (provider: ExternalProvider) =>
       provider as unknown as Awaited<ReturnType<InjectedConnector['getProvider']>>;
   })(injectedConnectorOptions) as InjectedConnector;
 
-const createWalletConnect2ConnectorWithId = (walletconnect2Id: string) =>
-  new WalletConnectConnector({
-    ...walletconnect2ConnectorOptions,
-    options: {
-      ...walletconnect2ConnectorOptions.options,
-      qrModalOptions: {
-        ...walletconnect2ConnectorOptions.options.qrModalOptions,
-        explorerRecommendedWalletIds: [walletconnect2Id],
-        explorerExcludedWalletIds: 'ALL',
-      },
-    },
-  });
 
 // Custom connector from wallet selection
 import {
@@ -131,7 +90,5 @@ export const resolveWagmiConnector = ({
 
   return walletConnection.type === WalletConnectionType.InjectedEip1193 && walletConnection.provider
     ? createInjectedConnectorWithProvider(walletConnection.provider)
-    : walletConnection.type === WalletConnectionType.WalletConnect2 && walletConfig.walletconnect2Id
-    ? createWalletConnect2ConnectorWithId(walletConfig.walletconnect2Id)
     : connectors.find(({ id }: { id: string }) => id === walletConnectionConfig.wagmiConnectorId);
 };
