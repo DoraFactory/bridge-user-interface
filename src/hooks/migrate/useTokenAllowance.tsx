@@ -39,8 +39,6 @@ export const useTokenAllowance = ({
       MustBigNumber(allowance as string).lt(amountBN?.shiftedBy(TOKEN_DECIMAL_SHIFT) ?? 0),
   });
 
-  console.log(`内部调试needTokenAllowance为${needTokenAllowance}`)
-
   const {
     data: approveTokenData,
     writeAsync: approveToken,
@@ -58,8 +56,6 @@ export const useTokenAllowance = ({
     ],
     chainId: Number(import.meta.env.VITE_ETH_CHAIN_ID),
   });
-  console.log(`approve有错误吗${isError}`)
-  console.log(`approve出现的错误为${error}`)
 
   const { isLoading: isApproveTokenTxPending, error: approveTokenTxError } = useWaitForTransaction({
     hash: approveTokenData?.hash,

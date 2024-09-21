@@ -72,9 +72,6 @@ const useMigrateTokenContext = () => {
   const isDestinationAddressValid = useIsDoraAddressValid(destinationAddress);
 
   const canWriteContracts = canAccountMigrate && isAmountValid && isDestinationAddressValid;
-  console.log(`在allowance中是否可以写合约？${canWriteContracts}`)
-  console.log(amountBN)
-  console.log(MigrateFormSteps.Preview)
   // Transactions
   const { needTokenAllowance, approveToken, ...tokenAllowance } = useTokenAllowance({
     amountBN,
@@ -82,7 +79,7 @@ const useMigrateTokenContext = () => {
     watch: currentStep === MigrateFormSteps.Preview,
   });
 
-  console.log(`needTokenAllowance is ${needTokenAllowance}`)
+  // console.log(`needTokenAllowance is ${needTokenAllowance}`)
 
   const { clearStatus, startBridge, bridgeTxError, transactionStatus, ...bridgeTransaction } =
     useBridgeTransaction({

@@ -30,11 +30,6 @@ const useAccountBalanceContext = () => {
   const { evmAddress, DoraAddress, getAccountBalance } = useAccounts();
   const canAccountMigrate = useSelector(calculateCanAccountMigrate);
 
-  console.log(`ETH dora contract address is ${import.meta.env.VITE_ETH_DORA_ADDRESSS}`)
-  console.log(`query evmAddress is ${evmAddress}`)
-  console.log(`是否可以进行账户迁移${canAccountMigrate}`)
-  console.log(`chain id is ${Number(import.meta.env.VITE_ETH_CHAIN_ID)}`)
-
   const { data: ethDORABalanceData, refetch: refetchethDORABalance } = useBalance({
     enabled: import.meta.env.VITE_ETH_DORA_ADDRESSS && evmAddress && canAccountMigrate,
     address: evmAddress,
@@ -50,16 +45,12 @@ const useAccountBalanceContext = () => {
     watch: true,
   });
 
-  console.log(`dydx使用合约查询的余额为${balance}`)
-
-  console.log(`ethDORABalanceData is ${ethDORABalanceData}`)
   const result = useBalance({
     enabled: import.meta.env.VITE_ETH_DORA_ADDRESSS && evmAddress && canAccountMigrate,
     address: evmAddress,
     chainId: Number(import.meta.env.VITE_ETH_CHAIN_ID),
     token: import.meta.env.VITE_ETH_DORA_ADDRESSS,
   });
-  console.log(`result查询结果为${result.toString()}`)
 
 
   const { data: DYDXBalance, refetch: refetchDYDXBalance } = useQuery({
@@ -81,8 +72,6 @@ const useAccountBalanceContext = () => {
   });
 
   const { formatted: ethDORABalance } = ethDORABalanceData || {};
-
-  console.log(ethDORABalance)
 
   const refetchBalances = () => {
     if (!evmAddress || !canAccountMigrate) return;

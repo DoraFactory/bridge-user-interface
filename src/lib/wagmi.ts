@@ -25,10 +25,6 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
   ].filter(isTruthy)
 );
 
-console.log(chains)
-console.log(publicClient)
-console.log(webSocketPublicClient)
-
 const injectedConnectorOptions = {
   chains,
   options: {

@@ -48,7 +48,6 @@ export const usePendingMigrationsData = ({
     functionName: 'totalRecords',
   });
 
-  console.log(`total totalRecordsData 数量is ${totalRecordsData}`);
 
   // Get processedRecords count
   const { data: processedRecordsData } = useContractRead({
@@ -56,7 +55,6 @@ export const usePendingMigrationsData = ({
     abi: bridgeContractAbi,
     functionName: 'processedRecords',
   });
-  console.log(`processedRecordsData 数量is ${processedRecordsData}`);
 
   // Get unprocessedRecords count
   const unprocessedCount = Number(totalRecordsData) - Number(processedRecordsData);
@@ -69,22 +67,17 @@ export const usePendingMigrationsData = ({
     args: [unprocessedCount],
     enabled: unprocessedCount > 0,
   });
-  console.log(`unprocessedCount is ${unprocessedCount}`);
-
-  console.log(`未处理的Record data为${unprocessedRecordsData}`);
 
   useEffect(() => {
     if (unprocessedCount > 0) {
       const fetchData = async () => {
         try {
-          console.log(`查询未处理的数据。。。。。。。。`);
           const data = unprocessedRecordsData;
           if (!data) {
             console.log('Data is undefined or null');
             setPendingMigrations([]);
             return;
           }
-          console.log(`data is ${data}`);
           if (Array.isArray(data) && data.length === 2) {
             const [size, records] = data;
             const mappedData = records.map((record, idx) => ({
@@ -123,7 +116,6 @@ export const usePendingMigrationsData = ({
     enabled: filter === PendingMigrationFilter.Mine && Boolean(evmAddress),
   });
 
-  console.log(`当前用户的Record记录为${evmUserRecords}`);
 
   useEffect(() => {
     if (error) {
@@ -144,8 +136,6 @@ export const usePendingMigrationsData = ({
       amount: BigNumber(record.amount).shiftedBy(-18),
       txHash: ethers.hexlify(record.txHash),
     })) as PendingMigrationData[];
-
-    console.log(`transformedEVMUserRecords is ${transformedEVMUserRecords}`);
 
     if (filter === PendingMigrationFilter.Mine && evmAddress) {
       setFilteredPendingMigrations(transformedEVMUserRecords);

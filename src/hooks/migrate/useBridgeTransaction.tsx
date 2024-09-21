@@ -66,7 +66,6 @@ export const useBridgeTransaction = ({
   const isDestinationAddressValid = useIsDoraAddressValid(destinationAddress);
 
   const canConfirmBridgeContracts = isAmountValid && isDestinationAddressValid;
-  console.log(`can bridge? ${canConfirmBridgeContracts}`)
 
   const { writeAsync: bridge, isLoading: isBridgePending } = useContractWrite({
     address: import.meta.env.VITE_BRIDGE_CONTRACT_ADDRESS,
