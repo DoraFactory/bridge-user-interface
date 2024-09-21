@@ -3,7 +3,7 @@ import BigNumber from 'bignumber.js';
 
 import { useContractWrite, useContractRead, useWaitForTransaction } from 'wagmi';
 
-import { ethINFContractAbi } from '@/constants/abi';
+import { ethDORAContractAbi } from '@/constants/abi';
 import { TOKEN_DECIMAL_SHIFT } from '@/constants/migrate';
 
 import { MustBigNumber } from '@/lib/numbers';
@@ -29,7 +29,7 @@ export const useTokenAllowance = ({
 
   const { data: needTokenAllowance, refetch } = useContractRead({
     address: import.meta.env.VITE_ETH_DORA_ADDRESSS,
-    abi: ethINFContractAbi,
+    abi: ethDORAContractAbi,
     functionName: 'allowance',
     args: [evmAddress, import.meta.env.VITE_BRIDGE_CONTRACT_ADDRESS],
     chainId: Number(import.meta.env.VITE_ETH_CHAIN_ID),
@@ -49,7 +49,7 @@ export const useTokenAllowance = ({
     error
   } = useContractWrite({
     address: import.meta.env.VITE_ETH_DORA_ADDRESSS,
-    abi: ethINFContractAbi,
+    abi: ethDORAContractAbi,
     functionName: 'approve',
     args: [
       import.meta.env.VITE_BRIDGE_CONTRACT_ADDRESS,

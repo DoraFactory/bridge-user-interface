@@ -2,7 +2,7 @@ import { useContext, createContext } from 'react';
 import { useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
 import { useBalance, useContractRead } from 'wagmi';
-import { ethINFContractAbi } from '@/constants/abi';
+import { ethDORAContractAbi } from '@/constants/abi';
 
 import { TOKEN_DECIMAL_SHIFT } from '@/constants/migrate';
 
@@ -44,7 +44,7 @@ const useAccountBalanceContext = () => {
 
   const { data: balance, isError, isLoading, refetch } = useContractRead({
     address: import.meta.env.VITE_ETH_DORA_ADDRESSS,
-    abi: ethINFContractAbi,
+    abi: ethDORAContractAbi,
     functionName: 'balanceOf',
     args: [evmAddress],
     watch: true,

@@ -1,4 +1,4 @@
 import bridgeContractAbi from './bridgeContractAbi.json';
-import ethINFContractAbi from './ethINFContractAbi.json';
+import ethDORAContractAbi from './ethDORAContractAbi.json';
 
-export { bridgeContractAbi, ethINFContractAbi };
+export { bridgeContractAbi, ethDORAContractAbi };
