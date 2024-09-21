@@ -75,10 +75,10 @@ const getPendingMigrationsTableColumnDef = ({
         renderCell: ({ txHash }) => (
           <TableCell stacked>
             {txHash === defaultTransactionHash ? (
-              "0x000000.....000000"
+              "Pending Migration"
             ) : (
-              <Link href={`${import.meta.env.VITE_DORA_EXPLORER_URL}/tx/${txHash.startsWith('0x') ? txHash.slice(2) : txHash}`} withIcon>
-                {truncateTransactionHash((txHash.startsWith('0x') ? txHash.slice(2) : txHash).valueOf())}
+              <Link href={`https://doravota.explorers.guru/transaction/${txHash.startsWith('0x') ? txHash.slice(2).toUpperCase() : txHash}`} withIcon>
+                {truncateTransactionHash((txHash.startsWith('0x') ? txHash.slice(2).toUpperCase() : txHash).valueOf())}
               </Link>
             )}
           </TableCell>

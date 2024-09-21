@@ -7,7 +7,7 @@ export const RELEVANT_LINKS = [
     value: 'DORA_EXPLORER',
     iconName: IconName.Mintscan,
     labelStringKey: DORA_KEYS.DORA_EXPLORER,
-    href: import.meta.env.VITE_DORA_EXPLORER_URL,
+    href: 'https://doravota.explorers.guru/',
   },
   {
     value: 'TERMS_OF_USE',
