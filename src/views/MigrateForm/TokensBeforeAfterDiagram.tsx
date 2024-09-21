@@ -51,7 +51,7 @@ export const TokensBeforeAfterDiagram = () => {
               <AssetIcon symbol="ETH" />
             </Styled.TokenIcon>
 
-            <Styled.Output
+            <Styled.Outputethdora
               value={amountBN?.negated()}
               type={OutputType.Asset}
               fractionDigits={TOKEN_DECIMALS}
@@ -165,4 +165,9 @@ Styled.TokenIcon = styled.div`
 
 Styled.Output = styled(Output)`
   --output-sign-color: var(--color-positive);
+`;
+
+
+Styled.Outputethdora = styled(Output)`
+  --output-sign-color: var(--color-negative);
 `;
