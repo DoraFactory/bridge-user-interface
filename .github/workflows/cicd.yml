@@ -13,9 +13,14 @@ jobs:
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v4
-      - name: Create .env file from secret
+      - name: Create .env file from secret for other branch
+        if: github.ref_name != 'main'
         run: |
           echo "${{ secrets.ENV_CONTENTS }}" > .env
+      - name: Create .env file from secret for main
+        if: github.ref_name == 'main'
+        run: |
+          echo "${{ secrets.ENV_CONTENTS_MAIN }}" > .env
       - name: Build image
         env:
           BUILD_ARG: ${{ github.ref_name }}
