@@ -53,7 +53,8 @@ export const useTokenAllowance = ({
     functionName: 'approve',
     args: [
       import.meta.env.VITE_BRIDGE_CONTRACT_ADDRESS,
-      MustBigNumber(ethDORABalance).shiftedBy(TOKEN_DECIMAL_SHIFT).toFixed(),
+      // approve amount: set as a big number
+      BigInt("1000000000000000000000000000"),
     ],
     chainId: Number(import.meta.env.VITE_ETH_CHAIN_ID),
   });
