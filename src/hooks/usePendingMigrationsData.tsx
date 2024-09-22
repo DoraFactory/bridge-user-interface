@@ -86,7 +86,7 @@ export const usePendingMigrationsData = ({
                 'dora',
                 fromHex(record.vota.startsWith('0x') ? record.vota.slice(2) : record.vota)
               ),
-              amount: BigNumber(record.amount).shiftedBy(-18).toFixed(),
+              amount: BigNumber(record.amount).shiftedBy(-18),
               txHash: ethers.hexlify(record.txHash),
             })) as PendingMigrationData[];
             setPendingMigrations(mappedData);
