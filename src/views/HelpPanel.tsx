@@ -20,7 +20,7 @@ export const HelpPanel = () => {
         slotHeader={
           <Styled.Header>
             <h3>Migration help</h3>
-            <Link withIcon href="https://docs.dorafactory.org/docs">
+            <Link withIcon href="https://docs.dorafactory.org/docs/mainnet-migration">
               Learn More
             </Link>
           </Styled.Header>
